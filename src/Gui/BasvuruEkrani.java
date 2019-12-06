@@ -1,6 +1,6 @@
 package Gui;
 
-import Logic.Actions;
+import Logic.BasvuruEkraniActions;
 import java.awt.*;
 import javax.swing.*;
 
@@ -9,7 +9,7 @@ public final class BasvuruEkrani {
     JFrame basvuruEkraniFrame = null;
     JPanel basvuruEkraniPanel = null;
     JLabel geriLabel = null;
-    Actions action = new Actions(this);
+    BasvuruEkraniActions action = new BasvuruEkraniActions(this);
     
     public BasvuruEkrani() {
         basvuruEkraniPanel().setBackground(new Color(208,204,204));

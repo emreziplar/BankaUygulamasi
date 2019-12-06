@@ -1,6 +1,6 @@
 package Gui;
 
-import Logic.Actions;
+import Logic.GirisEkraniActions;
 import java.awt.*;
 import javax.swing.*;
 
@@ -14,8 +14,7 @@ public final class GirisEkrani {
     JPasswordField sifreText = null;
     JLabel basvuruSoruLabel = null;
     JButton basvuruButton = null;
-
-    Actions actions = new Actions(this);
+    GirisEkraniActions action = new GirisEkraniActions(this);
 
     public GirisEkrani() {
         getGirisEkraniPanel().setBackground(new Color(255, 204, 204));
@@ -67,7 +66,7 @@ public final class GirisEkrani {
             musteriNo_TcNoText.setFont(getFont(0, 15));
             musteriNo_TcNoText.setBounds(100, 75, 250, 40);
             musteriNo_TcNoText.setForeground(new Color(153, 153, 153));
-            musteriNo_TcNoText.addFocusListener(actions);
+            musteriNo_TcNoText.addFocusListener(action);
         }
         return musteriNo_TcNoText;
     }
@@ -78,7 +77,7 @@ public final class GirisEkrani {
             sifreText.setText("**********");
             sifreText.setBounds(100, 150, 250, 40);
             sifreText.setForeground(new Color(153, 153, 153));
-            sifreText.addFocusListener(actions);
+            sifreText.addFocusListener(action);
         }
         return sifreText;
     }
@@ -90,7 +89,7 @@ public final class GirisEkrani {
             girisButton.setText("Giriş");
             girisButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             girisButton.setBounds(160, 210, 120, 30);
-            girisButton.addActionListener(actions);
+            girisButton.addActionListener(action);
         }
         return girisButton;
     }
@@ -112,7 +111,7 @@ public final class GirisEkrani {
             basvuruButton.setText("Başvur");
             basvuruButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             basvuruButton.setBounds(20, 285, 100, 30);
-            basvuruButton.addActionListener(actions);
+            basvuruButton.addActionListener(action);
         }
         return basvuruButton;
     }

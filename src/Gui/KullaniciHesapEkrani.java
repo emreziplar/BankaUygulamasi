@@ -1,7 +1,7 @@
 
 package Gui;
 
-import Logic.Actions;
+import Logic.KullaniciHesapEkraniActions;
 import java.awt.*;
 import javax.swing.*;
 
@@ -11,7 +11,7 @@ public final class KullaniciHesapEkrani {
     JFrame hesapEkraniFrame = null;
     JPanel hesapEkraniPanel = null;
     JButton girisButton = null;
-    Actions actions = new Actions(this);
+    KullaniciHesapEkraniActions actions = new KullaniciHesapEkraniActions(this);
     
     public KullaniciHesapEkrani() {
         getKullaniciHesapEkraniPanel().setBackground(new Color(204,204,204));
