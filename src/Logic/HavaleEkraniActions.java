@@ -59,11 +59,16 @@ public class HavaleEkraniActions extends Actions {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        sourceController().setSource(e.getSource());
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        sourceController().setSource(e.getSource());
+        
+        if (sourceController().labelSource(havaleEkrani().getGeriLabel())) {
+            havaleEkrani().getHavaleEkraniFrame().setVisible(false);
+            kullaniciHesapEkrani().getKullaniciHesapEkraniFrame().setVisible(true);
+        }
     }
 }

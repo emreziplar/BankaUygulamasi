@@ -42,7 +42,7 @@ public class OdemelerEkrani {
 
     public OdemelerEkrani() {
         getOdemelerEkraniPanel().setBackground(new Color(204,255,255));
-        getOdemelerEkraniPanel().add(geriLabel());
+        getOdemelerEkraniPanel().add(getGeriLabel());
         getOdemelerEkraniPanel().add(getAdSoyadLabel());
         getOdemelerEkraniPanel().add(getElektrikFaturasiLabel());
         getOdemelerEkraniPanel().add(getElektrikBorcuLabel());
@@ -64,8 +64,8 @@ public class OdemelerEkrani {
             odemelerEkraniFrame = new JFrame("Ödemeler Ekranı");
             odemelerEkraniFrame.setResizable(false);
             odemelerEkraniFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            odemelerEkraniFrame.setLocation(500, 220);
-            odemelerEkraniFrame.setSize(600, 400);
+            odemelerEkraniFrame.setLocation(630, 280);
+            odemelerEkraniFrame.setSize(600, 450);
             odemelerEkraniFrame.setContentPane(getOdemelerEkraniPanel());
         }
         return odemelerEkraniFrame;
@@ -80,7 +80,7 @@ public class OdemelerEkrani {
         return odemelerEkraniPanel;
     }
 
-    public JLabel geriLabel() {
+    public JLabel getGeriLabel() {
         if (geriLabel == null) {
             geriLabel = new JLabel();
             geriLabel.setBounds(10, 10, 30, 28);

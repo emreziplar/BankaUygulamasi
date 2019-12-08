@@ -75,12 +75,25 @@ public class BasvuruEkraniActions extends Actions {
         /*Basvuru Ekrani Basvur Buttonu*/
         if (sourceController().buttonSource(basvuruEkrani().getBasvurButton())) {
 
-            if (!JTextFieldLimit.isMinLimit(basvuruEkrani().getTelNoText())) {
-                uyariMesajlari().uyariMesajiGoster(basvuruEkrani().getBasvuruEkraniFrame(), "Tel No 11 Haneli Olmalı");
+            if (!alanlarBosmu()) {
+                if (!JTextFieldLimit.isMinLimit(basvuruEkrani().getTcNoText())) {
+                    uyariMesajlari().uyariMesajiGoster(basvuruEkrani().getBasvuruEkraniFrame(), "Tc No 11 Haneli Olmalıdır!");
+                } else if (!JTextFieldLimit.isMinLimit(basvuruEkrani().getTelNoText())) {
+                    uyariMesajlari().uyariMesajiGoster(basvuruEkrani().getBasvuruEkraniFrame(), "Tel No 11 Haneli Olmalıdır!");
+                } else {
+                    uyariMesajlari().uyariMesajiGoster(basvuruEkrani().getBasvuruEkraniFrame(), "BAŞARILI");
+                }
             } else {
-                uyariMesajlari().uyariMesajiGoster(basvuruEkrani().getBasvuruEkraniFrame(), "BAŞARILI");
+                uyariMesajlari().uyariMesajiGoster(basvuruEkrani().getBasvuruEkraniFrame(), "Tüm Alanlar Dolu Olmak Zorundadır!");
             }
         }
         /**/
+    }
+
+    public boolean alanlarBosmu() {
+        return basvuruEkrani().getAdSoyadText().getText().equals("")
+                || basvuruEkrani().getTcNoText().getText().equals("")
+                || basvuruEkrani().getTcNoText().getText().equals("")
+                || basvuruEkrani().getGuvenlikCevapText().getText().equals("");
     }
 }

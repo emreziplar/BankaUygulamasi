@@ -68,13 +68,9 @@ public class ParaYatirmaEkraniActions extends Actions {
         sourceController().setSource(e.getSource());
         
         if (sourceController().labelSource(paraYatirmaEkrani().getGeriLabel())) {
-            geriIconCalistir(paraYatirmaEkrani().getParaYatirmaEkraniFrame(),kullaniciHesapEkrani().getKullaniciHesapEkraniFrame());
+            paraYatirmaEkrani().getParaYatirmaEkraniFrame().setVisible(false);
+            kullaniciHesapEkrani().getKullaniciHesapEkraniFrame().setVisible(true);
         }
-    }
-    
-    public void geriIconCalistir(JFrame kapanacakFrame,JFrame acilacakFrame) {
-        kapanacakFrame.setVisible(false);
-        acilacakFrame.setVisible(true);
     }
 
 }

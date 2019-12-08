@@ -59,11 +59,16 @@ public class OdemelerEkraniActions extends Actions {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        sourceController().setSource(e.getSource());
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        sourceController().setSource(e.getSource());
 
+        if (sourceController().labelSource(OdemelerEkrani().getGeriLabel())) {
+            OdemelerEkrani().getOdemelerEkraniFrame().setVisible(false);
+            kullaniciHesapEkrani().getKullaniciHesapEkraniFrame().setVisible(true);
+        }
     }
 }
