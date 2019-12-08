@@ -27,12 +27,10 @@ public class Actions implements ActionListener, FocusListener, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) { //belirlenen kaynagin uzerine mouse geldiginde    
-
     }
 
     @Override
     public void mouseExited(MouseEvent e) { //belirlenen kaynagin uzerinden mouse ciktiginda  
-
     }
 
     @Override
