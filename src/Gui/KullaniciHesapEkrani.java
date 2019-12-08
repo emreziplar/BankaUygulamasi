@@ -1,10 +1,11 @@
 package Gui;
 
+import Logic.IPanelAyar;
 import Logic.KullaniciHesapEkraniActions;
 import java.awt.*;
 import javax.swing.*;
 
-public final class KullaniciHesapEkrani {
+public final class KullaniciHesapEkrani implements IPanelAyar {
 
     JFrame hesapEkraniFrame = null;
     JPanel hesapEkraniPanel = null;
@@ -26,21 +27,7 @@ public final class KullaniciHesapEkrani {
     KullaniciHesapEkraniActions actions = new KullaniciHesapEkraniActions(this);
 
     public KullaniciHesapEkrani() {
-        getKullaniciHesapEkraniPanel().setBackground(new Color(204, 204, 204));
-        getKullaniciHesapEkraniPanel().add(getCikisIcon());
-        getKullaniciHesapEkraniPanel().add(getHosgeldinizLabel());
-        getKullaniciHesapEkraniPanel().add(getAyarlarIcon());
-        getKullaniciHesapEkraniPanel().add(getAdSoyadLabel());
-        getKullaniciHesapEkraniPanel().add(getTurkLirasiIcon());
-        getKullaniciHesapEkraniPanel().add(getBakiyeLabel());
-        getKullaniciHesapEkraniPanel().add(getParaCekIcon());
-        getKullaniciHesapEkraniPanel().add(getParaCekButton());
-        getKullaniciHesapEkraniPanel().add(getParaYatirIcon());
-        getKullaniciHesapEkraniPanel().add(getParaYatirButton());
-        getKullaniciHesapEkraniPanel().add(getHavaleIcon());
-        getKullaniciHesapEkraniPanel().add(getHavaleButton());
-        getKullaniciHesapEkraniPanel().add(getOdemelerIcon());
-        getKullaniciHesapEkraniPanel().add(getOdemelerButton());
+        panelAyarlamalariYap(getKullaniciHesapEkraniPanel());
         getKullaniciHesapEkraniFrame().setVisible(true);
     }
 
@@ -222,6 +209,25 @@ public final class KullaniciHesapEkrani {
 
     public Font getFont(int style, int size) {
         return new Font("Segoe UI", style, size);
+    }
+
+    @Override
+    public void panelAyarlamalariYap(JPanel panel) {
+        panel.setBackground(new Color(204, 204, 204));
+        panel.add(getCikisIcon());
+        panel.add(getHosgeldinizLabel());
+        panel.add(getAyarlarIcon());
+        panel.add(getAdSoyadLabel());
+        panel.add(getTurkLirasiIcon());
+        panel.add(getBakiyeLabel());
+        panel.add(getParaCekIcon());
+        panel.add(getParaCekButton());
+        panel.add(getParaYatirIcon());
+        panel.add(getParaYatirButton());
+        panel.add(getHavaleIcon());
+        panel.add(getHavaleButton());
+        panel.add(getOdemelerIcon());
+        panel.add(getOdemelerButton());
     }
 
 }

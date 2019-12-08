@@ -60,9 +60,15 @@ public class ParaCekmeEkraniActions extends Actions {
     @Override
     public void actionPerformed(ActionEvent e) {
         sourceController().setSource(e.getSource());
-        
-        if(sourceController().buttonSource(paraCekmeEkrani().getParaCekButton())) {
-            
+
+        if (sourceController().buttonSource(paraCekmeEkrani().getParaCekButton())) {
+
+            if (!paraCekmeEkrani().getParaCekmeTutariText().getText().equals("")) {
+
+            } else {
+                uyariMesajlari().uyariMesajiGoster(paraCekmeEkrani().getParaCekmeEkraniFrame(), "Bir Tutar Girmelisiniz!");
+            }
+
         }
     }
 

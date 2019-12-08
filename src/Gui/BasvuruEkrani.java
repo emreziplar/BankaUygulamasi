@@ -1,12 +1,13 @@
 package Gui;
 
 import Logic.BasvuruEkraniActions;
+import Logic.IPanelAyar;
 import Logic.JTextFieldLimit;
 import Logic.KeyTyped;
 import java.awt.*;
 import javax.swing.*;
 
-public final class BasvuruEkrani {
+public final class BasvuruEkrani implements IPanelAyar{
 
     JFrame basvuruEkraniFrame = null;
     JPanel basvuruEkraniPanel = null;
@@ -27,21 +28,7 @@ public final class BasvuruEkrani {
     BasvuruEkraniActions action = new BasvuruEkraniActions(this);
 
     public BasvuruEkrani() {
-        getBasvuruEkraniPanel().setBackground(new Color(208, 204, 204));
-        getBasvuruEkraniPanel().add(getGeriLabel());
-        getBasvuruEkraniPanel().add(getKisiselBilgilerLabel());
-        getBasvuruEkraniPanel().add(getAdSoyadLabel());
-        getBasvuruEkraniPanel().add(getAdSoyadText());
-        getBasvuruEkraniPanel().add(getTcNoLabel());
-        getBasvuruEkraniPanel().add(getTcNoText());
-        getBasvuruEkraniPanel().add(getTelNoLabel());
-        getBasvuruEkraniPanel().add(getTelNoText());
-        getBasvuruEkraniPanel().add(getGuvenlikLabel());
-        getBasvuruEkraniPanel().add(getGuvenlikSorusuLabel());
-        getBasvuruEkraniPanel().add(getGuvenlikSorusuComboBox());
-        getBasvuruEkraniPanel().add(getGuvenlikCevapLabel());
-        getBasvuruEkraniPanel().add(getGuvenlikCevapText());
-        getBasvuruEkraniPanel().add(getBasvurButton());
+        panelAyarlamalariYap(getBasvuruEkraniPanel());
         getBasvuruEkraniFrame().setVisible(true);
     }
 
@@ -222,5 +209,24 @@ public final class BasvuruEkrani {
 
     public Font getFont(int style, int size) {
         return new Font("Segoe UI", style, size);
+    }
+
+    @Override
+    public void panelAyarlamalariYap(JPanel panel) {
+        panel.setBackground(new Color(208, 204, 204));
+        panel.add(getGeriLabel());
+        panel.add(getKisiselBilgilerLabel());
+        panel.add(getAdSoyadLabel());
+        panel.add(getAdSoyadText());
+        panel.add(getTcNoLabel());
+        panel.add(getTcNoText());
+        panel.add(getTelNoLabel());
+        panel.add(getTelNoText());
+        panel.add(getGuvenlikLabel());
+        panel.add(getGuvenlikSorusuLabel());
+        panel.add(getGuvenlikSorusuComboBox());
+        panel.add(getGuvenlikCevapLabel());
+        panel.add(getGuvenlikCevapText());
+        panel.add(getBasvurButton());
     }
 }

@@ -15,6 +15,7 @@ public final class GirisEkraniActions extends Actions {
     BasvuruEkrani basvuruEkrani = null;
     KullaniciHesapEkrani kullaniciHesapEkrani = null;
     SourceController sourceController = null;
+    UyariMesajlari uyariMesajlari = null;
 
     /*Giriş Ekranı*/
     public GirisEkraniActions(GirisEkrani girisEkrani) {
@@ -52,6 +53,13 @@ public final class GirisEkraniActions extends Actions {
             sourceController = new SourceController();
         }
         return sourceController;
+    }
+
+    public UyariMesajlari uyariMesajlari() {
+        if (uyariMesajlari == null) {
+            uyariMesajlari = new UyariMesajlari();
+        }
+        return uyariMesajlari;
     }
 
     @Override
@@ -138,5 +146,4 @@ public final class GirisEkraniActions extends Actions {
             sifreYenilemeEkrani.getSifreYenilemeFrame().setVisible(true);
         }
     }
-
 }

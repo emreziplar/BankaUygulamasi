@@ -6,6 +6,7 @@
 package Gui;
 
 import Logic.HavaleEkraniActions;
+import Logic.IPanelAyar;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -20,7 +21,8 @@ import javax.swing.JTextField;
  *
  * @author Emre
  */
-public class HavaleEkrani {
+public class HavaleEkrani implements IPanelAyar {
+
     JFrame havaleEkraniFrame = null;
     JPanel havaleEkraniPanel = null;
     JLabel geriLabel = null;
@@ -35,15 +37,13 @@ public class HavaleEkrani {
     HavaleEkraniActions action = new HavaleEkraniActions(this);
 
     public HavaleEkrani() {
-        getHavaleEkraniPanel().setBackground(new Color(255,204,255));
-        getHavaleEkraniPanel().add(getGeriLabel());
-        getHavaleEkraniPanel().add(adSoyadLabel());
-        getHavaleEkraniPanel().add(getToplamBakiyeLabel());
-        getHavaleEkraniPanel().add(musteriNoLabel());
-        getHavaleEkraniPanel().add(getMusteriNoText());
-        getHavaleEkraniPanel().add(getGonderilecekTutarLabel());
-        getHavaleEkraniPanel().add(getGonderilecekTutarText());
-        getHavaleEkraniPanel().add(gonderButton());
+        panelAyarlamalariYap(getHavaleEkraniPanel());
+
+        /*
+        getAdSoyadLabel().setText("VERİTABANI İŞLEMİ");
+        getToplamBakiyeLabel().setText("VERİTABANI İŞLEMİ");
+         */
+        
         getHavaleEkraniFrame().setVisible(true);
     }
 
@@ -79,7 +79,7 @@ public class HavaleEkrani {
         return geriLabel;
     }
 
-    public JLabel adSoyadLabel() {
+    public JLabel getAdSoyadLabel() {
         if (adSoyadLabel == null) {
             adSoyadLabel = new JLabel();
             adSoyadLabel.setText("Değerli Müşterimiz [Ad Soyad]");
@@ -102,7 +102,7 @@ public class HavaleEkrani {
         return toplamBakiyeLabel;
     }
 
-    public JLabel musteriNoLabel() {
+    public JLabel getMusteriNoLabel() {
         if (musteriNoLabel == null) {
             musteriNoLabel = new JLabel();
             musteriNoLabel.setText("Müşteri Numarası   :");
@@ -143,7 +143,7 @@ public class HavaleEkrani {
         return gonderilecekTutarText;
     }
 
-    public JButton gonderButton() {
+    public JButton getHavaleButton() {
         if (gonderButton == null) {
             gonderButton = new JButton();
             gonderButton.setText("Gönder");
@@ -157,5 +157,18 @@ public class HavaleEkrani {
 
     public Font getFont(int style, int size) {
         return new Font("Segoe UI", style, size);
+    }
+
+    @Override
+    public void panelAyarlamalariYap(JPanel panel) {
+        panel.setBackground(new Color(255, 204, 255));
+        panel.add(getGeriLabel());
+        panel.add(getAdSoyadLabel());
+        panel.add(getToplamBakiyeLabel());
+        panel.add(getMusteriNoLabel());
+        panel.add(getMusteriNoText());
+        panel.add(getGonderilecekTutarLabel());
+        panel.add(getGonderilecekTutarText());
+        panel.add(getHavaleButton());
     }
 }

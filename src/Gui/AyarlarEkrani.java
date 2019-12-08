@@ -1,12 +1,13 @@
 package Gui;
 
 import Logic.AyarlarEkraniActions;
+import Logic.IPanelAyar;
 import Logic.JTextFieldLimit;
 import Logic.KeyTyped;
 import java.awt.*;
 import javax.swing.*;
 
-public class AyarlarEkrani {
+public class AyarlarEkrani implements IPanelAyar {
 
     JFrame ayarlarEkraniFrame = null;
     JPanel ayarlarEkraniPanel = null;
@@ -23,17 +24,7 @@ public class AyarlarEkrani {
     AyarlarEkraniActions action = new AyarlarEkraniActions(this);
 
     public AyarlarEkrani() {
-        getAyarlarEkraniPanel().setBackground(new Color(204, 255, 204));
-        getAyarlarEkraniPanel().add(getGeriLabel());
-        getAyarlarEkraniPanel().add(getAdSoyadLabel());
-        getAyarlarEkraniPanel().add(getMusteriNoLabel());
-        getAyarlarEkraniPanel().add(getMusteriNoText());
-        getAyarlarEkraniPanel().add(getTelNoLabel());
-        getAyarlarEkraniPanel().add(getTelNoText());
-        getAyarlarEkraniPanel().add(getTelNoDegistirIcon());
-        getAyarlarEkraniPanel().add(getSifreLabel());
-        getAyarlarEkraniPanel().add(getSifreText());
-        getAyarlarEkraniPanel().add(getSifreDegistirIcon());
+        panelAyarlamalariYap(getAyarlarEkraniPanel());
         getAyarlarEkraniFrame().setVisible(true);
     }
 
@@ -73,7 +64,7 @@ public class AyarlarEkrani {
         if (adSoyadLabel == null) {
             adSoyadLabel = new JLabel();
             adSoyadLabel.setText("Sayın [Müşteri Adı Soyadı]");
-            adSoyadLabel.setFont(getFont(1, 19)); // style:bold , size:19
+            adSoyadLabel.setFont(getFont(1, 19)); 
             adSoyadLabel.setForeground(Color.red);
             adSoyadLabel.setBounds(20, 40, 350, 30);
         }
@@ -84,7 +75,7 @@ public class AyarlarEkrani {
         if (musteriNoLabel == null) {
             musteriNoLabel = new JLabel();
             musteriNoLabel.setText("Müşteri Numaranız : ");
-            musteriNoLabel.setFont(getFont(1, 16)); // style:bold , size:19
+            musteriNoLabel.setFont(getFont(0, 16));
             musteriNoLabel.setForeground(Color.black);
             musteriNoLabel.setBounds(20, 90, 160, 30);
         }
@@ -105,7 +96,7 @@ public class AyarlarEkrani {
         if (telNoLabel == null) {
             telNoLabel = new JLabel();
             telNoLabel.setText("Telefon Numaranız : ");
-            telNoLabel.setFont(getFont(1, 16)); // style:bold , size:19
+            telNoLabel.setFont(getFont(0, 16));
             telNoLabel.setForeground(Color.black);
             telNoLabel.setBounds(20, 140, 160, 30);
         }
@@ -139,7 +130,7 @@ public class AyarlarEkrani {
         if (sifreLabel == null) {
             sifreLabel = new JLabel();
             sifreLabel.setText("Şifreniz                       :");
-            sifreLabel.setFont(getFont(1, 16)); // style:bold , size:19
+            sifreLabel.setFont(getFont(0, 16)); 
             sifreLabel.setForeground(Color.black);
             sifreLabel.setBounds(20, 190, 160, 30);
         }
@@ -169,5 +160,20 @@ public class AyarlarEkrani {
 
     public Font getFont(int style, int size) {
         return new Font("Segoe UI", style, size);
+    }
+
+    @Override
+    public void panelAyarlamalariYap(JPanel panel) {
+        panel.setBackground(new Color(204, 255, 204));
+        panel.add(getGeriLabel());
+        panel.add(getAdSoyadLabel());
+        panel.add(getMusteriNoLabel());
+        panel.add(getMusteriNoText());
+        panel.add(getTelNoLabel());
+        panel.add(getTelNoText());
+        panel.add(getTelNoDegistirIcon());
+        panel.add(getSifreLabel());
+        panel.add(getSifreText());
+        panel.add(getSifreDegistirIcon());
     }
 }

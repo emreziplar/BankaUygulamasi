@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import Logic.IPanelAyar;
 import Logic.ParaCekmeEkraniActions;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -15,7 +16,7 @@ import javax.swing.*;
  *
  * @author Emre
  */
-public class ParaCekmeEkrani {
+public class ParaCekmeEkrani implements IPanelAyar {
 
     JFrame paraCekmeEkraniFrame = null;
     JPanel paraCekmeEkraniPanel = null;
@@ -28,13 +29,7 @@ public class ParaCekmeEkrani {
     ParaCekmeEkraniActions action = new ParaCekmeEkraniActions(this);
 
     public ParaCekmeEkrani() {
-        getParaCekmeEkraniPanel().setBackground(new Color(204,255,204));
-        getParaCekmeEkraniPanel().add(getGeriLabel());
-        getParaCekmeEkraniPanel().add(getAdSoyadLabel());
-        getParaCekmeEkraniPanel().add(getToplamBakiyeLabel());
-        getParaCekmeEkraniPanel().add(getParaCekmeTutariLabel());
-        getParaCekmeEkraniPanel().add(getParaCekmeTutariText());
-        getParaCekmeEkraniPanel().add(getParaCekButton());
+        panelAyarlamalariYap(getParaCekmeEkraniPanel());
         getParaCekmeEkraniFrame().setVisible(true);
     }
 
@@ -45,7 +40,7 @@ public class ParaCekmeEkrani {
             paraCekmeEkraniFrame.setResizable(false);
             paraCekmeEkraniFrame.setLocation(700, 320);
             paraCekmeEkraniFrame.setSize(480, 350);
-            paraCekmeEkraniFrame.setContentPane(getParaCekmeEkraniPanel());           
+            paraCekmeEkraniFrame.setContentPane(getParaCekmeEkraniPanel());
         }
         return paraCekmeEkraniFrame;
     }
@@ -126,5 +121,16 @@ public class ParaCekmeEkrani {
 
     public Font getFont(int style, int size) {
         return new Font("Segoe UI", style, size);
+    }
+
+    @Override
+    public void panelAyarlamalariYap(JPanel panel) {
+        panel.setBackground(new Color(204, 255, 204));
+        panel.add(getGeriLabel());
+        panel.add(getAdSoyadLabel());
+        panel.add(getToplamBakiyeLabel());
+        panel.add(getParaCekmeTutariLabel());
+        panel.add(getParaCekmeTutariText());
+        panel.add(getParaCekButton());
     }
 }

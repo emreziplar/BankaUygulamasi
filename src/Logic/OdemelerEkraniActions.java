@@ -60,6 +60,23 @@ public class OdemelerEkraniActions extends Actions {
     @Override
     public void actionPerformed(ActionEvent e) {
         sourceController().setSource(e.getSource());
+
+        if (sourceController().buttonSource(OdemelerEkrani().getElektrikOdeButton())) {
+
+        }
+
+        if (sourceController().buttonSource(OdemelerEkrani().getSuOdeButton())) {
+
+        }
+
+        if (sourceController().buttonSource(OdemelerEkrani().getDogalgazOdeButton())) {
+
+        }
+
+        if (sourceController().buttonSource(OdemelerEkrani().getInternetOdeButton())) {
+
+        }
+
     }
 
     @Override

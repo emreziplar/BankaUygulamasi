@@ -1,11 +1,12 @@
 package Gui;
 
 import Logic.GirisEkraniActions;
+import Logic.IPanelAyar;
 import Logic.KeyTyped;
 import java.awt.*;
 import javax.swing.*;
 
-public final class GirisEkrani {
+public final class GirisEkrani implements IPanelAyar{
 
     JFrame girisEkraniFrame = null;
     JPanel girisEkraniPanel = null;
@@ -19,14 +20,7 @@ public final class GirisEkrani {
     GirisEkraniActions action = new GirisEkraniActions(this);
 
     public GirisEkrani() {
-        getGirisEkraniPanel().setBackground(new Color(255, 204, 204));
-        getGirisEkraniPanel().add(getHosgeldinizLabel());
-        getGirisEkraniPanel().add(getMusteriNo_TcNoText());
-        getGirisEkraniPanel().add(getSifreText());
-        getGirisEkraniPanel().add(getGirisButton());
-        getGirisEkraniPanel().add(getSifremiUnuttumLabel());
-        getGirisEkraniPanel().add(getBasvuruSoruLabel());
-        getGirisEkraniPanel().add(getBasvuruButton());
+        panelAyarlamalariYap(getGirisEkraniPanel());
         getGirisEkraniFrame().setVisible(true);
     }
 
@@ -136,5 +130,17 @@ public final class GirisEkrani {
 
     public Font getFont(int style, int size) {
         return new Font("Segoe UI", style, size);
+    }
+
+    @Override
+    public void panelAyarlamalariYap(JPanel panel) {
+        panel.setBackground(new Color(255, 204, 204));
+        panel.add(getHosgeldinizLabel());
+        panel.add(getMusteriNo_TcNoText());
+        panel.add(getSifreText());
+        panel.add(getGirisButton());
+        panel.add(getSifremiUnuttumLabel());
+        panel.add(getBasvuruSoruLabel());
+        panel.add(getBasvuruButton());
     }
 }

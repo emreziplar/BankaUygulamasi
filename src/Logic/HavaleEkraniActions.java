@@ -60,6 +60,16 @@ public class HavaleEkraniActions extends Actions {
     @Override
     public void actionPerformed(ActionEvent e) {
         sourceController().setSource(e.getSource());
+        
+        if (sourceController().buttonSource(havaleEkrani().getHavaleButton())) {
+            
+            if (!havaleEkrani().getGonderilecekTutarText().getText().equals("") || !havaleEkrani().getMusteriNoText().getText().equals("")) {
+
+            } else {
+                uyariMesajlari().uyariMesajiGoster(havaleEkrani().getHavaleEkraniFrame(), "Tüm Alanlar Dolu Olmak Zorundadır!");
+            }
+
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package Gui;
 
+import Logic.IPanelAyar;
 import Logic.JTextFieldLimit;
 import Logic.KeyTyped;
 import Logic.SifreYenilemeEkraniActions;
@@ -7,7 +8,7 @@ import java.awt.*;
 import javax.swing.*;
 
 // çarpıya basınca ayarlar ekranına geri dönmesi ayarlanıcak
-public final class SifreYenilemeEkrani {
+public final class SifreYenilemeEkrani implements IPanelAyar {
 
     JFrame sifreYenilemeFrame = null;
     JPanel sifreYenilemePanel = null;
@@ -27,20 +28,7 @@ public final class SifreYenilemeEkrani {
     SifreYenilemeEkraniActions action = new SifreYenilemeEkraniActions(this);
 
     public SifreYenilemeEkrani() {
-        getSifreYenilemePanel().setBackground(new Color(255, 204, 204));
-        getSifreYenilemePanel().add(getSifreYenilemeLabel());
-        getSifreYenilemePanel().add(getGeriLabel());
-        getSifreYenilemePanel().add(getTcNoLabel());
-        getSifreYenilemePanel().add(getTcNoText());
-        getSifreYenilemePanel().add(getGuvenlikSorusuLabel());
-        getSifreYenilemePanel().add(getGuvenlikSorusuText());
-        getSifreYenilemePanel().add(getEskiSifreLabel());
-        getSifreYenilemePanel().add(getEskiSifreText());
-        getSifreYenilemePanel().add(getYeniSifreLabel());
-        getSifreYenilemePanel().add(getYeniSifreText());
-        getSifreYenilemePanel().add(getYeniSifreTekrarLabel());
-        getSifreYenilemePanel().add(getYeniSifreTekrarText());
-        getSifreYenilemePanel().add(getSifreYenileButton());
+        panelAyarlamalariYap(getSifreYenilemePanel());
         getSifreYenilemeFrame().setVisible(true);
     }
 
@@ -209,6 +197,24 @@ public final class SifreYenilemeEkrani {
 
     public Font getFont(int style, int size) {
         return new Font("Segoe UI", style, size);
+    }
+
+    @Override
+    public void panelAyarlamalariYap(JPanel panel) {
+        panel.setBackground(new Color(255, 204, 204));
+        panel.add(getSifreYenilemeLabel());
+        panel.add(getGeriLabel());
+        panel.add(getTcNoLabel());
+        panel.add(getTcNoText());
+        panel.add(getGuvenlikSorusuLabel());
+        panel.add(getGuvenlikSorusuText());
+        panel.add(getEskiSifreLabel());
+        panel.add(getEskiSifreText());
+        panel.add(getYeniSifreLabel());
+        panel.add(getYeniSifreText());
+        panel.add(getYeniSifreTekrarLabel());
+        panel.add(getYeniSifreTekrarText());
+        panel.add(getSifreYenileButton());
     }
 
 }

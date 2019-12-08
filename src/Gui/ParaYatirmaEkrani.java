@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import Logic.IPanelAyar;
 import Logic.ParaYatirmaEkraniActions;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -20,7 +21,8 @@ import javax.swing.JTextField;
  *
  * @author Emre
  */
-public class ParaYatirmaEkrani {
+public class ParaYatirmaEkrani implements IPanelAyar {
+
     JFrame paraYatirmaEkraniFrame = null;
     JPanel paraYatirmaEkraniPanel = null;
     JLabel geriLabel = null;
@@ -32,13 +34,7 @@ public class ParaYatirmaEkrani {
     ParaYatirmaEkraniActions action = new ParaYatirmaEkraniActions(this);
 
     public ParaYatirmaEkrani() {
-        getParaYatirmaEkraniPanel().setBackground(new Color(255,255,204));
-        getParaYatirmaEkraniPanel().add(getGeriLabel());
-        getParaYatirmaEkraniPanel().add(getAdSoyadLabel());
-        getParaYatirmaEkraniPanel().add(getToplamBakiyeLabel());
-        getParaYatirmaEkraniPanel().add(getParaYatirmaTutariLabel());
-        getParaYatirmaEkraniPanel().add(getParaYatirmaTutariText());
-        getParaYatirmaEkraniPanel().add(getParaCekButton());
+        panelAyarlamalariYap(getParaYatirmaEkraniPanel());
         getParaYatirmaEkraniFrame().setVisible(true);
     }
 
@@ -49,7 +45,7 @@ public class ParaYatirmaEkrani {
             paraYatirmaEkraniFrame.setResizable(false);
             paraYatirmaEkraniFrame.setLocation(700, 320);
             paraYatirmaEkraniFrame.setSize(480, 350);
-            paraYatirmaEkraniFrame.setContentPane(getParaYatirmaEkraniPanel());           
+            paraYatirmaEkraniFrame.setContentPane(getParaYatirmaEkraniPanel());
         }
         return paraYatirmaEkraniFrame;
     }
@@ -116,7 +112,7 @@ public class ParaYatirmaEkrani {
         return paraYatirmaTutariText;
     }
 
-    public JButton getParaCekButton() {
+    public JButton getParaYatirButton() {
         if (paraCekButton == null) {
             paraCekButton = new JButton();
             paraCekButton.setText("Para Yatır");
@@ -130,5 +126,16 @@ public class ParaYatirmaEkrani {
 
     public Font getFont(int style, int size) {
         return new Font("Segoe UI", style, size);
+    }
+
+    @Override
+    public void panelAyarlamalariYap(JPanel panel) {
+        panel.setBackground(new Color(255, 255, 204));
+        panel.add(getGeriLabel());
+        panel.add(getAdSoyadLabel());
+        panel.add(getToplamBakiyeLabel());
+        panel.add(getParaYatirmaTutariLabel());
+        panel.add(getParaYatirmaTutariText());
+        panel.add(getParaYatirButton());
     }
 }

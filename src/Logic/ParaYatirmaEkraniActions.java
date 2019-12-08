@@ -61,12 +61,22 @@ public class ParaYatirmaEkraniActions extends Actions {
     @Override
     public void actionPerformed(ActionEvent e) {
         sourceController().setSource(e.getSource());
+
+        if (sourceController().buttonSource(paraYatirmaEkrani().getParaYatirButton())) {
+            
+            if (!paraYatirmaEkrani().getParaYatirmaTutariText().getText().equals("")) {
+
+            } else {
+                uyariMesajlari().uyariMesajiGoster(paraYatirmaEkrani().getParaYatirmaEkraniFrame(), "Bir Tutar Girmelisiniz!");
+            }
+
+        }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         sourceController().setSource(e.getSource());
-        
+
         if (sourceController().labelSource(paraYatirmaEkrani().getGeriLabel())) {
             paraYatirmaEkrani().getParaYatirmaEkraniFrame().setVisible(false);
             kullaniciHesapEkrani().getKullaniciHesapEkraniFrame().setVisible(true);

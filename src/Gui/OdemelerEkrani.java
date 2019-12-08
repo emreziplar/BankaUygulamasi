@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import Logic.IPanelAyar;
 import Logic.OdemelerEkraniActions;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -19,7 +20,7 @@ import javax.swing.JPanel;
  *
  * @author Emre
  */
-public class OdemelerEkrani {
+public class OdemelerEkrani implements IPanelAyar{
     
     JFrame odemelerEkraniFrame = null;
     JPanel odemelerEkraniPanel = null;
@@ -41,21 +42,7 @@ public class OdemelerEkrani {
     OdemelerEkraniActions action = new OdemelerEkraniActions(this);
 
     public OdemelerEkrani() {
-        getOdemelerEkraniPanel().setBackground(new Color(204,255,255));
-        getOdemelerEkraniPanel().add(getGeriLabel());
-        getOdemelerEkraniPanel().add(getAdSoyadLabel());
-        getOdemelerEkraniPanel().add(getElektrikFaturasiLabel());
-        getOdemelerEkraniPanel().add(getElektrikBorcuLabel());
-        getOdemelerEkraniPanel().add(getElektrikOdeButton());
-        getOdemelerEkraniPanel().add(getSuFaturasiLabel());
-        getOdemelerEkraniPanel().add(getSuBorcuLabel());
-        getOdemelerEkraniPanel().add(getSuOdeButton());
-        getOdemelerEkraniPanel().add(getDogalgazFaturasiLabel());
-        getOdemelerEkraniPanel().add(getDogalgazBorcuLabel());
-        getOdemelerEkraniPanel().add(getDogalgazOdeButton());
-        getOdemelerEkraniPanel().add(getInternetFaturasiLabel());
-        getOdemelerEkraniPanel().add(getInternetBorcuLabel());
-        getOdemelerEkraniPanel().add(getInternetOdeButton());
+        panelAyarlamalariYap(getOdemelerEkraniPanel());
         getOdemelerEkraniFrame().setVisible(true);
     }
 
@@ -240,6 +227,25 @@ public class OdemelerEkrani {
 
     public Font getFont(int style, int size) {
         return new Font("Segoe UI", style, size);
+    }
+
+    @Override
+    public void panelAyarlamalariYap(JPanel panel) {
+        panel.setBackground(new Color(248,248,248));
+        panel.add(getGeriLabel());
+        panel.add(getAdSoyadLabel());
+        panel.add(getElektrikFaturasiLabel());
+        panel.add(getElektrikBorcuLabel());
+        panel.add(getElektrikOdeButton());
+        panel.add(getSuFaturasiLabel());
+        panel.add(getSuBorcuLabel());
+        panel.add(getSuOdeButton());
+        panel.add(getDogalgazFaturasiLabel());
+        panel.add(getDogalgazBorcuLabel());
+        panel.add(getDogalgazOdeButton());
+        panel.add(getInternetFaturasiLabel());
+        panel.add(getInternetBorcuLabel());
+        panel.add(getInternetOdeButton());
     }
 
 }
