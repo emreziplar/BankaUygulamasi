@@ -26,8 +26,9 @@ public class AyarlarEkrani implements IPanelAyar {
 
     public AyarlarEkrani() {
         panelAyarlamalariYap(getAyarlarEkraniPanel());
+        getAdSoyadLabel().setText("Değerli Müşterimiz "+Actions.getDataController().getAdSoyad());
         getMusteriNoText().setText(Actions.getDataController().getMusteriNo());
-        getTelNoText().setText(Actions.getDataController().getTelNo());
+        getTelNoText().setText(Actions.getDataController().getTelNo());      
         getAyarlarEkraniFrame().setVisible(true);
     }
 

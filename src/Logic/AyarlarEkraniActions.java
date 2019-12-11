@@ -32,7 +32,7 @@ public class AyarlarEkraniActions extends Actions {
         /*Geri Iconu*/
         if (sourceController().labelSource(ayarlarEkrani().getGeriLabel())) {
             ayarlarEkrani().getAyarlarEkraniFrame().setVisible(false);
-            kullaniciHesapEkrani().getKullaniciHesapEkraniFrame().setVisible(true);
+            kullaniciHesapEkrani();
         }
         /**/
  /*Tel No Degistirme Iconu*/

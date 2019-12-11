@@ -33,9 +33,9 @@ public class SifreYenilemeEkraniActions extends Actions {
         if (sourceController().labelSource(sifreYenilemeEkrani().getGeriLabel())) {
             sifreYenilemeEkrani().getSifreYenilemeFrame().setVisible(false);
             if (eskiSifreTextAktifMi()) { //eger kullanici sifremi unuttum ekraninda degilse(eski sifre aktifse)
-                kullaniciHesapEkrani().getKullaniciHesapEkraniFrame().setVisible(true);
+                ayarlarEkrani();
             } else {
-                girisEkrani().getGirisEkraniFrame().setVisible(true);
+                girisEkrani();
             }
         }
     }

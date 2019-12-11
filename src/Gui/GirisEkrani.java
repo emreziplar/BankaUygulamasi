@@ -2,6 +2,7 @@ package Gui;
 
 import Logic.GirisEkraniActions;
 import Logic.IPanelAyar;
+import Logic.JTextFieldLimit;
 import Logic.KeyTyped;
 import java.awt.*;
 import javax.swing.*;

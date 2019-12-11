@@ -35,6 +35,7 @@ public class OdemelerEkrani implements IPanelAyar {
 
     public OdemelerEkrani() {
         panelAyarlamalariYap(getOdemelerEkraniPanel());
+        getAdSoyadLabel().setText("Değerli Müşterimiz " + Actions.getDataController().getAdSoyad());
         getElektrikBorcuLabel().setText(String.valueOf(Actions.getDataController().getElektrikFaturasi()) + " TL");
         getSuBorcuLabel().setText(String.valueOf(Actions.getDataController().getSuFaturasi()) + " TL");
         getInternetBorcuLabel().setText(String.valueOf(Actions.getDataController().getInternetFaturasi()) + " TL");
