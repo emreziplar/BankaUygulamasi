@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Logic;
 
 import Gui.ParaCekmeEkrani;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
-/**
- *
- * @author Emre
- */
 public class ParaCekmeEkraniActions extends Actions {
 
     DbParaCekmeActions dbParaCekmeActions = null;

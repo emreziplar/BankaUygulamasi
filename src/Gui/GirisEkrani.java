@@ -1,6 +1,5 @@
 package Gui;
 
-import Logic.DatabaseActions;
 import Logic.GirisEkraniActions;
 import Logic.IPanelAyar;
 import Logic.KeyTyped;

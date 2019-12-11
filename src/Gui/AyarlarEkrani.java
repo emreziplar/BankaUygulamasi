@@ -5,7 +5,6 @@ import Logic.AyarlarEkraniActions;
 import Logic.IPanelAyar;
 import Logic.JTextFieldLimit;
 import Logic.KeyTyped;
-import Logic.SingletonMusteri;
 import java.awt.*;
 import javax.swing.*;
 

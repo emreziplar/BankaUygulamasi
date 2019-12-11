@@ -7,7 +7,6 @@ import Logic.SifreYenilemeEkraniActions;
 import java.awt.*;
 import javax.swing.*;
 
-// çarpıya basınca ayarlar ekranına geri dönmesi ayarlanıcak
 public final class SifreYenilemeEkrani implements IPanelAyar {
 
     private JFrame sifreYenilemeFrame = null;

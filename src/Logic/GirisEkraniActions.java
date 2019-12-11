@@ -2,7 +2,7 @@ package Logic;
 
 import Gui.GirisEkrani;
 import Gui.SifreYenilemeEkrani;
-import java.awt.*;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;

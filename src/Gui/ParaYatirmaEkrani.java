@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Gui;
 
 import Logic.Actions;
@@ -19,10 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Emre
- */
 public class ParaYatirmaEkrani implements IPanelAyar {
 
     private JFrame paraYatirmaEkraniFrame = null;
@@ -37,8 +28,8 @@ public class ParaYatirmaEkrani implements IPanelAyar {
 
     public ParaYatirmaEkrani() {
         panelAyarlamalariYap(getParaYatirmaEkraniPanel());
-        getAdSoyadLabel().setText("Değerli Müşterimiz "+Actions.getDataController().getAdSoyad());
-        getToplamBakiyeLabel().setText("Hesabınızda toplam "+Actions.getDataController().getBakiye()+" TL bakiye bulunmaktadır.");
+        getAdSoyadLabel().setText("Değerli Müşterimiz " + Actions.getDataController().getAdSoyad());
+        getToplamBakiyeLabel().setText("Hesabınızda toplam " + Actions.getDataController().getBakiye() + " TL bakiye bulunmaktadır.");
         getParaYatirmaEkraniFrame().setVisible(true);
     }
 

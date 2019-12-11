@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Logic;
 
 import Gui.SifreYenilemeEkrani;
@@ -10,10 +5,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
-/**
- *
- * @author Emre
- */
 public class SifreYenilemeEkraniActions extends Actions {
 
     private DbSifreYenilemeActions dbSifreYenilemeActions = null;
@@ -53,8 +44,7 @@ public class SifreYenilemeEkraniActions extends Actions {
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
 
-        if (sourceController().buttonSource(sifreYenilemeEkrani().getSifreYenileButton())) 
-        {
+        if (sourceController().buttonSource(sifreYenilemeEkrani().getSifreYenileButton())) {
             if (alanlarDoluMu()) {
                 sifreyiYenile();
             } else {

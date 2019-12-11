@@ -31,8 +31,8 @@ public class DbSifreYenilemeActions extends DatabaseActions { //T.C. numarasina 
         bilgileriSorgula(tcNo);
         if (eskiSifre == Actions.getDataController().getSifre()
                 && tcNo.equals(this.tcNo) && guvenlikCevap.equals(this.guvenlikCevap)) {
-        //eger girdigi eski sifre de dogruysa(bunu kullanici hesabindayken sifresini degisterebildigi icin sorgulatabiliriz)
-        //sifreyiYenile metodunda bunu sorgulatamayiz.Cunku kullanici hesabina giris yapmis durumda degil
+            //eger girdigi eski sifre de dogruysa(bunu kullanici hesabindayken sifresini degisterebildigi icin sorgulatabiliriz)
+            //sifreyiYenile metodunda bunu sorgulatamayiz.Cunku kullanici hesabina giris yapmis durumda degil
             try {
                 preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setInt(1, yeniSifre);

@@ -1,20 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Logic;
 
 import Gui.AyarlarEkrani;
-import Gui.KullaniciHesapEkrani;
 import Gui.SifreYenilemeEkrani;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author Emre
- */
 public class AyarlarEkraniActions extends Actions {
 
     private DbTelNoYenileme dbTelNoYenileme = null;

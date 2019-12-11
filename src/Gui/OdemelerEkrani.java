@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Gui;
 
 import Logic.Actions;
@@ -17,10 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- *
- * @author Emre
- */
 public class OdemelerEkrani implements IPanelAyar {
 
     private JFrame odemelerEkraniFrame = null;
@@ -44,10 +35,10 @@ public class OdemelerEkrani implements IPanelAyar {
 
     public OdemelerEkrani() {
         panelAyarlamalariYap(getOdemelerEkraniPanel());
-        getElektrikBorcuLabel().setText(String.valueOf(Actions.getDataController().getElektrikFaturasi())+" TL");
-        getSuBorcuLabel().setText(String.valueOf(Actions.getDataController().getSuFaturasi())+" TL");
-        getInternetBorcuLabel().setText(String.valueOf(Actions.getDataController().getInternetFaturasi())+" TL");
-        getDogalgazBorcuLabel().setText(String.valueOf(Actions.getDataController().getDogalgazFaturasi())+" TL");
+        getElektrikBorcuLabel().setText(String.valueOf(Actions.getDataController().getElektrikFaturasi()) + " TL");
+        getSuBorcuLabel().setText(String.valueOf(Actions.getDataController().getSuFaturasi()) + " TL");
+        getInternetBorcuLabel().setText(String.valueOf(Actions.getDataController().getInternetFaturasi()) + " TL");
+        getDogalgazBorcuLabel().setText(String.valueOf(Actions.getDataController().getDogalgazFaturasi()) + " TL");
         getOdemelerEkraniFrame().setVisible(true);
     }
 

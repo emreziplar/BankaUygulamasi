@@ -1,20 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Logic;
 
 import Gui.HavaleEkrani;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- *
- * @author Emre
- */
 public class HavaleEkraniActions extends Actions {
 
     private DbHavaleActions dbHavaleActions = null;
@@ -39,7 +28,7 @@ public class HavaleEkraniActions extends Actions {
         super.actionPerformed(e);
 
         String musteriNo = havaleEkrani().getMusteriNoText().getText();
-        double gonderilecekMiktar = 0.0; //NumberFormatException hatasi icin
+        double gonderilecekMiktar = 0.0; //NumberFormatException hatasi almamak icin
 
         if (sourceController().buttonSource(havaleEkrani().getHavaleButton())) {
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Gui;
 
 import Logic.Actions;
@@ -14,10 +9,6 @@ import java.awt.Cursor;
 import java.awt.Font;
 import javax.swing.*;
 
-/**
- *
- * @author Emre
- */
 public class ParaCekmeEkrani implements IPanelAyar {
 
     private JFrame paraCekmeEkraniFrame = null;
@@ -32,8 +23,8 @@ public class ParaCekmeEkrani implements IPanelAyar {
 
     public ParaCekmeEkrani() {
         panelAyarlamalariYap(getParaCekmeEkraniPanel());
-        getAdSoyadLabel().setText("Değerli Müşterimiz "+Actions.getDataController().getAdSoyad());
-        getToplamBakiyeLabel().setText("Hesabınızda toplam "+Actions.getDataController().getBakiye()+" TL bakiye bulunmaktadır.");
+        getAdSoyadLabel().setText("Değerli Müşterimiz " + Actions.getDataController().getAdSoyad());
+        getToplamBakiyeLabel().setText("Hesabınızda toplam " + Actions.getDataController().getBakiye() + " TL bakiye bulunmaktadır.");
         getParaCekmeEkraniFrame().setVisible(true);
     }
 

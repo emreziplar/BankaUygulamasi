@@ -7,25 +7,25 @@ import Logic.KeyTyped;
 import java.awt.*;
 import javax.swing.*;
 
-public final class BasvuruEkrani implements IPanelAyar{
+public final class BasvuruEkrani implements IPanelAyar {
 
- private   JFrame basvuruEkraniFrame = null;
-  private  JPanel basvuruEkraniPanel = null;
-  private  JLabel geriLabel = null;
-  private  JLabel kisiselBilgilerLabel = null;
-  private  JLabel adSoyadLabel = null;
-   private JTextField adSoyadText = null;
-  private  JLabel tcNoLabel = null;
+    private JFrame basvuruEkraniFrame = null;
+    private JPanel basvuruEkraniPanel = null;
+    private JLabel geriLabel = null;
+    private JLabel kisiselBilgilerLabel = null;
+    private JLabel adSoyadLabel = null;
+    private JTextField adSoyadText = null;
+    private JLabel tcNoLabel = null;
     private JTextField tcNoText = null;
-   private JLabel telNoLabel = null;
-   private JTextField telNoText = null;
- private   JLabel guvenlikLabel = null;
-  private  JLabel guvenlikSorusuLabel = null;
-  private  JComboBox guvenlikSorusuComboBox = null;
-  private  JLabel guvenlikCevapLabel = null;
-  private  JTextField guvenlikCevapText = null;
-  private  JButton basvurButton = null;
-  private  BasvuruEkraniActions action = new BasvuruEkraniActions(this);
+    private JLabel telNoLabel = null;
+    private JTextField telNoText = null;
+    private JLabel guvenlikLabel = null;
+    private JLabel guvenlikSorusuLabel = null;
+    private JComboBox guvenlikSorusuComboBox = null;
+    private JLabel guvenlikCevapLabel = null;
+    private JTextField guvenlikCevapText = null;
+    private JButton basvurButton = null;
+    private BasvuruEkraniActions action = new BasvuruEkraniActions(this);
 
     public BasvuruEkrani() {
         panelAyarlamalariYap(getBasvuruEkraniPanel());

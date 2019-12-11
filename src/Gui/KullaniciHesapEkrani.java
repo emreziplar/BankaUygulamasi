@@ -1,8 +1,6 @@
 package Gui;
 
 import Logic.Actions;
-import static Logic.Actions.getDataController;
-import Logic.DbDataController;
 import Logic.IPanelAyar;
 import Logic.KullaniciHesapEkraniActions;
 import Logic.SingletonMusteri;

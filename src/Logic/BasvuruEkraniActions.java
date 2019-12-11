@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Logic;
 
 import Gui.BasvuruEkrani;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import javax.swing.JPanel;
 
-/**
- *
- * @author Emre
- */
 public class BasvuruEkraniActions extends Actions {
 
     private DbBasvuruActions dbBasvuruActions = null;
@@ -121,7 +111,7 @@ public class BasvuruEkraniActions extends Actions {
             }
         }
     }
-    
+
     public void textleriBosalt() {
         basvuruEkrani().getAdSoyadText().setText("");
         basvuruEkrani().getTcNoText().setText("");
