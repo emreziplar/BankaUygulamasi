@@ -5,11 +5,9 @@
  */
 package Logic;
 
-import Gui.KullaniciHesapEkrani;
 import Gui.ParaYatirmaEkrani;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import javax.swing.JFrame;
 
 /**
  *
@@ -17,10 +15,8 @@ import javax.swing.JFrame;
  */
 public class ParaYatirmaEkraniActions extends Actions {
 
-    ParaYatirmaEkrani paraYatirmaEkrani = null;
-    KullaniciHesapEkrani kullaniciHesapEkrani = null;
-    SourceController sourceController = null;
-    UyariMesajlari uyariMesajlari = null;
+    private DbParaYatirmaActions dbParaYatirmaActions = null;
+    private double yatirilacakMiktar = 0.0;
 
     public ParaYatirmaEkraniActions(ParaYatirmaEkrani paraYatirmaEkrani) {
         setParaYatirmaEkrani(paraYatirmaEkrani);
@@ -30,42 +26,26 @@ public class ParaYatirmaEkraniActions extends Actions {
         this.paraYatirmaEkrani = paraYatirmaEkrani;
     }
 
-    public ParaYatirmaEkrani paraYatirmaEkrani() {
-        if (paraYatirmaEkrani == null) {
-            paraYatirmaEkrani = new ParaYatirmaEkrani();
+    public DbParaYatirmaActions getDbParaYatirmaActions() {
+        if (dbParaYatirmaActions == null) {
+            dbParaYatirmaActions = new DbParaYatirmaActions();
         }
-        return paraYatirmaEkrani;
-    }
-
-    public KullaniciHesapEkrani kullaniciHesapEkrani() {
-        if (kullaniciHesapEkrani == null) {
-            kullaniciHesapEkrani = new KullaniciHesapEkrani();
-        }
-        return kullaniciHesapEkrani;
-    }
-
-    public SourceController sourceController() {
-        if (sourceController == null) {
-            sourceController = new SourceController();
-        }
-        return sourceController;
-    }
-
-    public UyariMesajlari uyariMesajlari() {
-        if (uyariMesajlari == null) {
-            uyariMesajlari = new UyariMesajlari();
-        }
-        return uyariMesajlari;
+        return dbParaYatirmaActions;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        sourceController().setSource(e.getSource());
+        super.actionPerformed(e);
 
         if (sourceController().buttonSource(paraYatirmaEkrani().getParaYatirButton())) {
-            
-            if (!paraYatirmaEkrani().getParaYatirmaTutariText().getText().equals("")) {
 
+            if (!paraYatirmaEkrani().getParaYatirmaTutariText().getText().equals("")) {
+                yatirilacakMiktar = Double.valueOf(paraYatirmaEkrani().getParaYatirmaTutariText().getText());
+                if (uyariMesajlari().onayMesajiGoster(paraYatirmaEkrani().getParaYatirmaEkraniFrame(),
+                        "Toplam " + yatirilacakMiktar + " TL hesabınıza tanımlanacaktır.",
+                        "Onaylıyor musunuz?") == 1) { //eger onaylarsa
+                    paraYatir(yatirilacakMiktar);
+                }
             } else {
                 uyariMesajlari().uyariMesajiGoster(paraYatirmaEkrani().getParaYatirmaEkraniFrame(), "Bir Tutar Girmelisiniz!");
             }
@@ -75,12 +55,27 @@ public class ParaYatirmaEkraniActions extends Actions {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        sourceController().setSource(e.getSource());
+        super.mouseClicked(e);
 
         if (sourceController().labelSource(paraYatirmaEkrani().getGeriLabel())) {
             paraYatirmaEkrani().getParaYatirmaEkraniFrame().setVisible(false);
-            kullaniciHesapEkrani().getKullaniciHesapEkraniFrame().setVisible(true);
+            kullaniciHesapEkrani();
         }
     }
 
+    public void paraYatir(double yatirilacakMiktar) {
+        if (getDbParaYatirmaActions().paraYatir(yatirilacakMiktar)) {
+            paraYatirmaEkrani().getParaYatirmaEkraniFrame().setVisible(false);
+            if (uyariMesajlari().onayMesajiGoster(paraYatirmaEkrani().getParaYatirmaEkraniFrame(),
+                    "Hesabınıza " + yatirilacakMiktar + " TL tanımlanmıştır.\nBaşka işlem yapmak istiyor musunuz?", "Onay") == 1) {
+                kullaniciHesapEkrani();
+            } else {
+                girisEkrani();
+            }
+        } else if (yatirilacakMiktar == 0) {
+            uyariMesajlari().uyariMesajiGoster(paraYatirmaEkrani().getParaYatirmaEkraniFrame(), "Yatıracağınız miktar 1 TL ve katları olmalıdır.");
+        } else {
+            uyariMesajlari().uyariMesajiGoster(paraYatirmaEkrani().getParaYatirmaEkraniFrame(), "Tek seferde 5000 TL ve altını yatırabilirsiniz!");
+        }
+    }
 }

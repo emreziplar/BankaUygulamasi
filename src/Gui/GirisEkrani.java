@@ -1,23 +1,24 @@
 package Gui;
 
+import Logic.DatabaseActions;
 import Logic.GirisEkraniActions;
 import Logic.IPanelAyar;
 import Logic.KeyTyped;
 import java.awt.*;
 import javax.swing.*;
 
-public final class GirisEkrani implements IPanelAyar{
+public final class GirisEkrani implements IPanelAyar {
 
-    JFrame girisEkraniFrame = null;
-    JPanel girisEkraniPanel = null;
-    JButton girisButton = null;
-    JLabel hosgeldinizLabel = null;
-    JTextField musteriNo_TcNoText = null;
-    JPasswordField sifreText = null;
-    JLabel basvuruSoruLabel = null;
-    JButton basvuruButton = null;
-    JLabel sifremiUnuttumLabel = null;
-    GirisEkraniActions action = new GirisEkraniActions(this);
+    private JFrame girisEkraniFrame = null;
+    private JPanel girisEkraniPanel = null;
+    private JButton girisButton = null;
+    private JLabel hosgeldinizLabel = null;
+    private JTextField musteriNo_TcNoText = null;
+    private JPasswordField sifreText = null;
+    private JLabel basvuruSoruLabel = null;
+    private JButton basvuruButton = null;
+    private JLabel sifremiUnuttumLabel = null;
+    private GirisEkraniActions action = new GirisEkraniActions(this);
 
     public GirisEkrani() {
         panelAyarlamalariYap(getGirisEkraniPanel());

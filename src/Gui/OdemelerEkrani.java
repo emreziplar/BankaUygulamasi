@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import Logic.Actions;
 import Logic.IPanelAyar;
 import Logic.OdemelerEkraniActions;
 import java.awt.Color;
@@ -20,29 +21,33 @@ import javax.swing.JPanel;
  *
  * @author Emre
  */
-public class OdemelerEkrani implements IPanelAyar{
-    
-    JFrame odemelerEkraniFrame = null;
-    JPanel odemelerEkraniPanel = null;
-    JLabel geriLabel = null;
-    JLabel adSoyadLabel = null;
-    JLabel elektrikFaturasiLabel = null;
-    JLabel elektrikBorcuLabel = null;
-    JButton elektrikOdeButton = null;
-    JLabel suFaturasiLabel = null;
-    JLabel suBorcuLabel = null;
-    JButton suOdeButton = null;
-    JLabel dogalgazFaturasiLabel = null;
-    JLabel dogalgazBorcuLabel = null;
-    JButton dogalgazOdeButton = null;
-    JLabel internetFaturasiLabel = null;
-    JLabel internetBorcuLabel = null;
-    JButton internetOdeButton = null;
+public class OdemelerEkrani implements IPanelAyar {
+
+    private JFrame odemelerEkraniFrame = null;
+    private JPanel odemelerEkraniPanel = null;
+    private JLabel geriLabel = null;
+    private JLabel adSoyadLabel = null;
+    private JLabel elektrikFaturasiLabel = null;
+    private JLabel elektrikBorcuLabel = null;
+    private JButton elektrikOdeButton = null;
+    private JLabel suFaturasiLabel = null;
+    private JLabel suBorcuLabel = null;
+    private JButton suOdeButton = null;
+    private JLabel dogalgazFaturasiLabel = null;
+    private JLabel dogalgazBorcuLabel = null;
+    private JButton dogalgazOdeButton = null;
+    private JLabel internetFaturasiLabel = null;
+    private JLabel internetBorcuLabel = null;
+    private JButton internetOdeButton = null;
 
     OdemelerEkraniActions action = new OdemelerEkraniActions(this);
 
     public OdemelerEkrani() {
         panelAyarlamalariYap(getOdemelerEkraniPanel());
+        getElektrikBorcuLabel().setText(String.valueOf(Actions.getDataController().getElektrikFaturasi())+" TL");
+        getSuBorcuLabel().setText(String.valueOf(Actions.getDataController().getSuFaturasi())+" TL");
+        getInternetBorcuLabel().setText(String.valueOf(Actions.getDataController().getInternetFaturasi())+" TL");
+        getDogalgazBorcuLabel().setText(String.valueOf(Actions.getDataController().getDogalgazFaturasi())+" TL");
         getOdemelerEkraniFrame().setVisible(true);
     }
 
@@ -231,7 +236,7 @@ public class OdemelerEkrani implements IPanelAyar{
 
     @Override
     public void panelAyarlamalariYap(JPanel panel) {
-        panel.setBackground(new Color(248,248,248));
+        panel.setBackground(new Color(248, 248, 248));
         panel.add(getGeriLabel());
         panel.add(getAdSoyadLabel());
         panel.add(getElektrikFaturasiLabel());
@@ -249,5 +254,3 @@ public class OdemelerEkrani implements IPanelAyar{
     }
 
 }
-
-

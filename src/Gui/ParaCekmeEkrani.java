@@ -5,7 +5,9 @@
  */
 package Gui;
 
+import Logic.Actions;
 import Logic.IPanelAyar;
+import Logic.KeyTyped;
 import Logic.ParaCekmeEkraniActions;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -18,18 +20,20 @@ import javax.swing.*;
  */
 public class ParaCekmeEkrani implements IPanelAyar {
 
-    JFrame paraCekmeEkraniFrame = null;
-    JPanel paraCekmeEkraniPanel = null;
-    JLabel geriLabel = null;
-    JLabel adSoyadLabel = null;
-    JLabel toplamBakiyeLabel = null;
-    JLabel paraCekmeTutari = null;
-    JTextField paraCekmeTutariText = null;
-    JButton paraCekButton = null;
-    ParaCekmeEkraniActions action = new ParaCekmeEkraniActions(this);
+    private JFrame paraCekmeEkraniFrame = null;
+    private JPanel paraCekmeEkraniPanel = null;
+    private JLabel geriLabel = null;
+    private JLabel adSoyadLabel = null;
+    private JLabel toplamBakiyeLabel = null;
+    private JLabel paraCekmeTutari = null;
+    private JTextField paraCekmeTutariText = null;
+    private JButton paraCekButton = null;
+    private ParaCekmeEkraniActions action = new ParaCekmeEkraniActions(this);
 
     public ParaCekmeEkrani() {
         panelAyarlamalariYap(getParaCekmeEkraniPanel());
+        getAdSoyadLabel().setText("Değerli Müşterimiz "+Actions.getDataController().getAdSoyad());
+        getToplamBakiyeLabel().setText("Hesabınızda toplam "+Actions.getDataController().getBakiye()+" TL bakiye bulunmaktadır.");
         getParaCekmeEkraniFrame().setVisible(true);
     }
 
@@ -71,7 +75,7 @@ public class ParaCekmeEkrani implements IPanelAyar {
             adSoyadLabel.setText("Değerli Müşterimiz [Ad Soyad]");
             adSoyadLabel.setFont(getFont(1, 18));
             adSoyadLabel.setForeground(Color.red);
-            adSoyadLabel.setBounds(20, 60, 280, 35);
+            adSoyadLabel.setBounds(20, 60, 450, 35);
         }
         return adSoyadLabel;
     }
@@ -103,6 +107,7 @@ public class ParaCekmeEkrani implements IPanelAyar {
             paraCekmeTutariText = new JTextField();
             paraCekmeTutariText.setFont(getFont(0, 18));
             paraCekmeTutariText.setBounds(155, 210, 150, 35);
+            KeyTyped.sadeceSayiAl(getParaCekmeEkraniFrame(), paraCekmeTutariText);
         }
         return paraCekmeTutariText;
     }

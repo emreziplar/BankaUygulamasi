@@ -1,33 +1,48 @@
 package Gui;
 
+import Logic.Actions;
+import static Logic.Actions.getDataController;
+import Logic.DbDataController;
 import Logic.IPanelAyar;
 import Logic.KullaniciHesapEkraniActions;
+import Logic.SingletonMusteri;
 import java.awt.*;
 import javax.swing.*;
 
-public final class KullaniciHesapEkrani implements IPanelAyar {
+public class KullaniciHesapEkrani implements IPanelAyar {
 
-    JFrame hesapEkraniFrame = null;
-    JPanel hesapEkraniPanel = null;
-    JButton girisButton = null;
-    JLabel cikisIcon = null;
-    JLabel hosgeldinizLabel = null;
-    JLabel ayarlarIcon = null;
-    JLabel adSoyadLabel = null;
-    JLabel turkLirasiIcon = null;
-    JLabel bakiyeLabel = null;
-    JLabel paraCekIcon = null;
-    JButton paraCekButton = null;
-    JLabel paraYatirIcon = null;
-    JButton paraYatirButton = null;
-    JLabel havaleIcon = null;
-    JButton havaleButton = null;
-    JLabel odemelerIcon = null;
-    JButton odemelerButton = null;
-    KullaniciHesapEkraniActions actions = new KullaniciHesapEkraniActions(this);
+    private JFrame hesapEkraniFrame = null;
+    private JPanel hesapEkraniPanel = null;
+    private JButton girisButton = null;
+    private JLabel cikisIcon = null;
+    private JLabel hosgeldinizLabel = null;
+    private JLabel ayarlarIcon = null;
+    private JLabel adSoyadLabel = null;
+    private JLabel turkLirasiIcon = null;
+    private JLabel bakiyeLabel = null;
+    private JLabel paraCekIcon = null;
+    private JButton paraCekButton = null;
+    private JLabel paraYatirIcon = null;
+    private JButton paraYatirButton = null;
+    private JLabel havaleIcon = null;
+    private JButton havaleButton = null;
+    private JLabel odemelerIcon = null;
+    private JButton odemelerButton = null;
+    private KullaniciHesapEkraniActions actions = new KullaniciHesapEkraniActions(this);
+    private SingletonMusteri singletonMusteri = null;
+
+    public SingletonMusteri getSingletonMusteri() {
+        if (singletonMusteri == null) {
+            singletonMusteri = SingletonMusteri.getInstance();
+        }
+        return singletonMusteri;
+    }
 
     public KullaniciHesapEkrani() {
         panelAyarlamalariYap(getKullaniciHesapEkraniPanel());
+        Actions.getDataController().verileriAl(getSingletonMusteri().getMusteriNo_Tc());
+        getAdSoyadLabel().setText(Actions.getDataController().getAdSoyad());
+        getBakiyeLabel().setText(String.valueOf(Actions.getDataController().getBakiye()));
         getKullaniciHesapEkraniFrame().setVisible(true);
     }
 
@@ -69,7 +84,7 @@ public final class KullaniciHesapEkrani implements IPanelAyar {
             hosgeldinizLabel.setText("HOŞGELDİN");
             hosgeldinizLabel.setFont(new Font("Arial", Font.BOLD, 18));
             hosgeldinizLabel.setForeground(Color.black);
-            hosgeldinizLabel.setBounds(350, 20, 110, 50);
+            hosgeldinizLabel.setBounds(370, 20, 110, 50);
         }
         return hosgeldinizLabel;
     }
@@ -91,8 +106,8 @@ public final class KullaniciHesapEkrani implements IPanelAyar {
             adSoyadLabel.setText("Müşteri Adı Soyadı");
             adSoyadLabel.setFont(new Font("Cambria Math", Font.PLAIN, 42));
             adSoyadLabel.setForeground(Color.red);
-            adSoyadLabel.setBounds(245, 80, 500, 50);
-
+            adSoyadLabel.setBounds(0, 80, 850, 50);
+            adSoyadLabel.setHorizontalAlignment(JLabel.CENTER);
         }
         return adSoyadLabel;
     }
@@ -113,7 +128,7 @@ public final class KullaniciHesapEkrani implements IPanelAyar {
             bakiyeLabel.setText("BAKİYE");
             bakiyeLabel.setFont(new Font("Gungsuh", Font.PLAIN, 36));
             bakiyeLabel.setForeground(Color.black);
-            bakiyeLabel.setBounds(415, 210, 200, 55);
+            bakiyeLabel.setBounds(435, 210, 200, 55);
 
         }
         return bakiyeLabel;

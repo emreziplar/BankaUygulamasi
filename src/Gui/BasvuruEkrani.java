@@ -9,23 +9,23 @@ import javax.swing.*;
 
 public final class BasvuruEkrani implements IPanelAyar{
 
-    JFrame basvuruEkraniFrame = null;
-    JPanel basvuruEkraniPanel = null;
-    JLabel geriLabel = null;
-    JLabel kisiselBilgilerLabel = null;
-    JLabel adSoyadLabel = null;
-    JTextField adSoyadText = null;
-    JLabel tcNoLabel = null;
-    JTextField tcNoText = null;
-    JLabel telNoLabel = null;
-    JTextField telNoText = null;
-    JLabel guvenlikLabel = null;
-    JLabel guvenlikSorusuLabel = null;
-    JComboBox guvenlikSorusuComboBox = null;
-    JLabel guvenlikCevapLabel = null;
-    JTextField guvenlikCevapText = null;
-    JButton basvurButton = null;
-    BasvuruEkraniActions action = new BasvuruEkraniActions(this);
+ private   JFrame basvuruEkraniFrame = null;
+  private  JPanel basvuruEkraniPanel = null;
+  private  JLabel geriLabel = null;
+  private  JLabel kisiselBilgilerLabel = null;
+  private  JLabel adSoyadLabel = null;
+   private JTextField adSoyadText = null;
+  private  JLabel tcNoLabel = null;
+    private JTextField tcNoText = null;
+   private JLabel telNoLabel = null;
+   private JTextField telNoText = null;
+ private   JLabel guvenlikLabel = null;
+  private  JLabel guvenlikSorusuLabel = null;
+  private  JComboBox guvenlikSorusuComboBox = null;
+  private  JLabel guvenlikCevapLabel = null;
+  private  JTextField guvenlikCevapText = null;
+  private  JButton basvurButton = null;
+  private  BasvuruEkraniActions action = new BasvuruEkraniActions(this);
 
     public BasvuruEkrani() {
         panelAyarlamalariYap(getBasvuruEkraniPanel());
@@ -38,7 +38,7 @@ public final class BasvuruEkrani implements IPanelAyar{
             basvuruEkraniFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //pencereyi hicbir sekilde kapatamaz
             basvuruEkraniFrame.setResizable(false); //pencere boyutu ayarlanamaz
             basvuruEkraniFrame.setSize(500, 483);
-            basvuruEkraniFrame.setLocation(650, 220);
+            basvuruEkraniFrame.setLocation(680, 250);
             basvuruEkraniFrame.setContentPane(getBasvuruEkraniPanel());
         }
         return basvuruEkraniFrame;

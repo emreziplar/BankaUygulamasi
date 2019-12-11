@@ -5,7 +5,9 @@
  */
 package Gui;
 
+import Logic.Actions;
 import Logic.IPanelAyar;
+import Logic.KeyTyped;
 import Logic.ParaYatirmaEkraniActions;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -23,18 +25,20 @@ import javax.swing.JTextField;
  */
 public class ParaYatirmaEkrani implements IPanelAyar {
 
-    JFrame paraYatirmaEkraniFrame = null;
-    JPanel paraYatirmaEkraniPanel = null;
-    JLabel geriLabel = null;
-    JLabel adSoyadLabel = null;
-    JLabel toplamBakiyeLabel = null;
-    JLabel paraYatirmaTutari = null;
-    JTextField paraYatirmaTutariText = null;
-    JButton paraCekButton = null;
-    ParaYatirmaEkraniActions action = new ParaYatirmaEkraniActions(this);
+    private JFrame paraYatirmaEkraniFrame = null;
+    private JPanel paraYatirmaEkraniPanel = null;
+    private JLabel geriLabel = null;
+    private JLabel adSoyadLabel = null;
+    private JLabel toplamBakiyeLabel = null;
+    private JLabel paraYatirmaTutari = null;
+    private JTextField paraYatirmaTutariText = null;
+    private JButton paraCekButton = null;
+    private ParaYatirmaEkraniActions action = new ParaYatirmaEkraniActions(this);
 
     public ParaYatirmaEkrani() {
         panelAyarlamalariYap(getParaYatirmaEkraniPanel());
+        getAdSoyadLabel().setText("Değerli Müşterimiz "+Actions.getDataController().getAdSoyad());
+        getToplamBakiyeLabel().setText("Hesabınızda toplam "+Actions.getDataController().getBakiye()+" TL bakiye bulunmaktadır.");
         getParaYatirmaEkraniFrame().setVisible(true);
     }
 
@@ -108,6 +112,7 @@ public class ParaYatirmaEkrani implements IPanelAyar {
             paraYatirmaTutariText = new JTextField();
             paraYatirmaTutariText.setFont(getFont(0, 18));
             paraYatirmaTutariText.setBounds(155, 210, 150, 35);
+            KeyTyped.sadeceSayiAl(getParaYatirmaEkraniFrame(), paraYatirmaTutariText);
         }
         return paraYatirmaTutariText;
     }

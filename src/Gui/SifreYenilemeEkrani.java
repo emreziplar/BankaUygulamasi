@@ -10,22 +10,22 @@ import javax.swing.*;
 // çarpıya basınca ayarlar ekranına geri dönmesi ayarlanıcak
 public final class SifreYenilemeEkrani implements IPanelAyar {
 
-    JFrame sifreYenilemeFrame = null;
-    JPanel sifreYenilemePanel = null;
-    JLabel geriLabel = null;
-    JLabel sifreyenilemeLabel = null;
-    JLabel tcnoLabel = null;
-    JTextField tcnoTextField = null;
-    JLabel guvenliksorusuLabel = null;
-    JTextField guvenliksorusuTextField = null;
-    JLabel eskisifreLabel = null;
-    JPasswordField eskiSifreText = null;
-    JLabel yenisifreLabel = null;
-    JPasswordField yeniSifreText = null;
-    JLabel yenisifretekrarLabel = null;
-    JPasswordField yeniSifreTekrarText = null;
-    JButton sifreyenileButton = null;
-    SifreYenilemeEkraniActions action = new SifreYenilemeEkraniActions(this);
+    private JFrame sifreYenilemeFrame = null;
+    private JPanel sifreYenilemePanel = null;
+    private JLabel geriLabel = null;
+    private JLabel sifreyenilemeLabel = null;
+    private JLabel tcnoLabel = null;
+    private JTextField tcnoTextField = null;
+    private JLabel guvenliksorusuLabel = null;
+    private JTextField guvenliksorusuTextField = null;
+    private JLabel eskisifreLabel = null;
+    private JPasswordField eskiSifreText = null;
+    private JLabel yenisifreLabel = null;
+    private JPasswordField yeniSifreText = null;
+    private JLabel yenisifretekrarLabel = null;
+    private JPasswordField yeniSifreTekrarText = null;
+    private JButton sifreyenileButton = null;
+    private SifreYenilemeEkraniActions action = new SifreYenilemeEkraniActions(this);
 
     public SifreYenilemeEkrani() {
         panelAyarlamalariYap(getSifreYenilemePanel());
@@ -37,7 +37,7 @@ public final class SifreYenilemeEkrani implements IPanelAyar {
             sifreYenilemeFrame = new JFrame("Şifre Değiştirme");
             sifreYenilemeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             sifreYenilemeFrame.setResizable(false);
-            sifreYenilemeFrame.setLocation(700, 300);
+            sifreYenilemeFrame.setLocation(650, 280);
             sifreYenilemeFrame.setSize(530, 460);
             sifreYenilemeFrame.setContentPane(getSifreYenilemePanel());
         }
@@ -97,7 +97,7 @@ public final class SifreYenilemeEkrani implements IPanelAyar {
         return tcnoTextField;
     }
 
-    public JLabel getGuvenlikSorusuLabel() {
+    public JLabel getGuvenlikCevapLabel() {
         if (guvenliksorusuLabel == null) {
             guvenliksorusuLabel = new JLabel();
             guvenliksorusuLabel.setText("Güvenlik Sorusu Cevabınız :");
@@ -108,7 +108,7 @@ public final class SifreYenilemeEkrani implements IPanelAyar {
         return guvenliksorusuLabel;
     }
 
-    public JTextField getGuvenlikSorusuText() {
+    public JTextField getGuvenlikCevapText() {
         if (guvenliksorusuTextField == null) {
             guvenliksorusuTextField = new JTextField();
             guvenliksorusuTextField.setFont(getFont(0, 15));
@@ -206,8 +206,8 @@ public final class SifreYenilemeEkrani implements IPanelAyar {
         panel.add(getGeriLabel());
         panel.add(getTcNoLabel());
         panel.add(getTcNoText());
-        panel.add(getGuvenlikSorusuLabel());
-        panel.add(getGuvenlikSorusuText());
+        panel.add(getGuvenlikCevapLabel());
+        panel.add(getGuvenlikCevapText());
         panel.add(getEskiSifreLabel());
         panel.add(getEskiSifreText());
         panel.add(getYeniSifreLabel());

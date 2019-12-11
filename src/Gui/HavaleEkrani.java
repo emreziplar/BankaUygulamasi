@@ -5,8 +5,10 @@
  */
 package Gui;
 
+import Logic.Actions;
 import Logic.HavaleEkraniActions;
 import Logic.IPanelAyar;
+import Logic.KeyTyped;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -23,27 +25,23 @@ import javax.swing.JTextField;
  */
 public class HavaleEkrani implements IPanelAyar {
 
-    JFrame havaleEkraniFrame = null;
-    JPanel havaleEkraniPanel = null;
-    JLabel geriLabel = null;
-    JLabel adSoyadLabel = null;
-    JLabel toplamBakiyeLabel = null;
-    JLabel musteriNoLabel = null;
-    JTextField musteriNoText = null;
-    JLabel gonderilecekTutarLabel = null;
-    JTextField gonderilecekTutarText = null;
-    JButton gonderButton = null;
+    private JFrame havaleEkraniFrame = null;
+    private JPanel havaleEkraniPanel = null;
+    private JLabel geriLabel = null;
+    private JLabel adSoyadLabel = null;
+    private JLabel toplamBakiyeLabel = null;
+    private JLabel musteriNoLabel = null;
+    private JTextField musteriNoText = null;
+    private JLabel gonderilecekTutarLabel = null;
+    private JTextField gonderilecekTutarText = null;
+    private JButton gonderButton = null;
 
     HavaleEkraniActions action = new HavaleEkraniActions(this);
 
     public HavaleEkrani() {
         panelAyarlamalariYap(getHavaleEkraniPanel());
-
-        /*
-        getAdSoyadLabel().setText("VERİTABANI İŞLEMİ");
-        getToplamBakiyeLabel().setText("VERİTABANI İŞLEMİ");
-         */
-        
+        getAdSoyadLabel().setText("Değerli Müşterimiz "+Actions.getDataController().getAdSoyad());
+        getToplamBakiyeLabel().setText("Hesabınızda toplam "+Actions.getDataController().getBakiye()+" TL bakiye bulunmaktadır.");
         getHavaleEkraniFrame().setVisible(true);
     }
 
@@ -85,7 +83,7 @@ public class HavaleEkrani implements IPanelAyar {
             adSoyadLabel.setText("Değerli Müşterimiz [Ad Soyad]");
             adSoyadLabel.setFont(getFont(1, 18));
             adSoyadLabel.setForeground(Color.red);
-            adSoyadLabel.setBounds(20, 60, 280, 35);
+            adSoyadLabel.setBounds(20, 60, 450, 35);
         }
         return adSoyadLabel;
     }
@@ -118,6 +116,7 @@ public class HavaleEkrani implements IPanelAyar {
             musteriNoText = new JTextField();
             musteriNoText.setFont(getFont(0, 18));
             musteriNoText.setBounds(200, 150, 180, 35);
+            KeyTyped.sadeceSayiAl(getHavaleEkraniFrame(), musteriNoText);
         }
         return musteriNoText;
     }
@@ -139,6 +138,7 @@ public class HavaleEkrani implements IPanelAyar {
             gonderilecekTutarText = new JTextField();
             gonderilecekTutarText.setFont(getFont(0, 18));
             gonderilecekTutarText.setBounds(200, 200, 180, 35);
+            KeyTyped.sadeceSayiAl(getHavaleEkraniFrame(), gonderilecekTutarText);
         }
         return gonderilecekTutarText;
     }

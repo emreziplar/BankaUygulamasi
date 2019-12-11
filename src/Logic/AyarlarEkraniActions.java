@@ -17,10 +17,9 @@ import javax.swing.ImageIcon;
  */
 public class AyarlarEkraniActions extends Actions {
 
-    AyarlarEkrani ayarlarEkrani = null;
-    SourceController sourceController = null;
-    KullaniciHesapEkrani kullaniciHesapEkrani = null;
-    UyariMesajlari uyariMesajlari = null;
+    private DbTelNoYenileme dbTelNoYenileme = null;
+    private boolean onaylaIcon = false; //telNoIcon'una tiklanip tiklanmadigini kontrol etmek icin
+    private String yeniTelNo;
 
     public AyarlarEkraniActions(AyarlarEkrani ayarlarEkrani) {
         setAyarlarEkrani(ayarlarEkrani);
@@ -30,47 +29,22 @@ public class AyarlarEkraniActions extends Actions {
         this.ayarlarEkrani = ayarlarEkrani;
     }
 
-    public AyarlarEkrani ayarlarEkrani() {
-        if (ayarlarEkrani == null) {
-            ayarlarEkrani = new AyarlarEkrani();
+    public DbTelNoYenileme getDbTelNoYenileme() {
+        if (dbTelNoYenileme == null) {
+            dbTelNoYenileme = new DbTelNoYenileme();
         }
-        return ayarlarEkrani;
+        return dbTelNoYenileme;
     }
-
-    public SourceController sourceController() {
-        if (sourceController == null) {
-            sourceController = new SourceController();
-        }
-        return sourceController;
-    }
-
-    public KullaniciHesapEkrani kullaniciHesapEkrani() {
-        if (kullaniciHesapEkrani == null) {
-            kullaniciHesapEkrani = new KullaniciHesapEkrani();
-        }
-        return kullaniciHesapEkrani;
-    }
-
-    public UyariMesajlari uyariMesajlari() {
-        if (uyariMesajlari == null) {
-            uyariMesajlari = new UyariMesajlari();
-        }
-        return uyariMesajlari;
-    }
-
-    boolean onaylaIcon = false; //telNoIcon'una tiklanip tiklanmadigini kontrol etmek icin
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        sourceController().setSource(e.getSource());
-
+        super.mouseClicked(e);
         /*Geri Iconu*/
         if (sourceController().labelSource(ayarlarEkrani().getGeriLabel())) {
             ayarlarEkrani().getAyarlarEkraniFrame().setVisible(false);
             kullaniciHesapEkrani().getKullaniciHesapEkraniFrame().setVisible(true);
         }
         /**/
-
  /*Tel No Degistirme Iconu*/
         if (sourceController().labelSource(ayarlarEkrani().getTelNoDegistirIcon())) {
             if (!onaylaIcon) { //yani icon'a tiklanmamissa
@@ -78,19 +52,17 @@ public class AyarlarEkraniActions extends Actions {
                 ayarlarEkrani().getTelNoDegistirIcon().setIcon(new ImageIcon(getClass().getResource("/Gui/Image/onaylaIcon.png")));
                 this.onaylaIcon = true;
             } else {
-                if (!telNoTextIsEmpty() && JTextFieldLimit.isMinLimit(ayarlarEkrani().getTelNoText())) { //eger telNoText bos degilse ve minLimit true ise
-                    uyariMesajlari().uyariMesajiGoster(ayarlarEkrani().getAyarlarEkraniFrame(),
-                            "Telefon numaranız " + ayarlarEkrani().getTelNoText().getText() + " olarak değiştirilmiştir.");
+                if (!telNoTextIsEmpty() && JTextFieldLimit.isMinLimit(ayarlarEkrani().getTelNoText())) { //eger telNoText bos degilse ve minLimit true ise                   
+                    telNoYenile();
                     ayarlarEkrani().getTelNoText().setEditable(false);
                     ayarlarEkrani().getTelNoDegistirIcon().setIcon(new ImageIcon(getClass().getResource("/Gui/Image/degistirIcon.png")));
                     this.onaylaIcon = false;
                 } else {
-                    uyariMesajlari().uyariMesajiGoster(ayarlarEkrani().getAyarlarEkraniFrame(), "Geçerli bir telefon numaralı girmelisiniz!");
+                    uyariMesajlari().uyariMesajiGoster(ayarlarEkrani().getAyarlarEkraniFrame(), "Telefon No 11 Haneli Olmalı!");
                 }
             }
         }
         /**/
-
  /*Sifre Degistirme Iconu*/
         if (sourceController().labelSource(ayarlarEkrani().getSifreDegistirIcon())) {
             ayarlarEkrani().getAyarlarEkraniFrame().setVisible(false);
@@ -103,4 +75,10 @@ public class AyarlarEkraniActions extends Actions {
         return ayarlarEkrani().getTelNoText().getText().equals(""); //bos ise true donecek
     }
 
+    public void telNoYenile() {
+        yeniTelNo = ayarlarEkrani().getTelNoText().getText().trim();
+        getDbTelNoYenileme().telNoYenile(this.yeniTelNo);
+        Actions.getDataController().setTelNo(yeniTelNo);
+        uyariMesajlari().uyariMesajiGoster(ayarlarEkrani().getAyarlarEkraniFrame(), "Telefon numaranız " + yeniTelNo + " olarak değiştirilmiştir");
+    }
 }
