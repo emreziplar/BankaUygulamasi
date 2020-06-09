@@ -1,164 +1,298 @@
+
 package gui;
 
-import actions.Actions;
-import actions.HavaleEkraniActions;
-import bones.KeyTyped;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import database.IBilgiController;
+import database.transactions.Havale;
+import database.transactions.HesapBilgileri;
+import gui.ayarlar.ActionAyarlari;
+import gui.ayarlar.Dialogs;
+import gui.ayarlar.IDuzenleyici;
+import gui.ayarlar.TextAyarlari;
 
-public class HavaleEkrani implements IPanelAyar {
-
-    private JFrame havaleEkraniFrame = null;
-    private JPanel havaleEkraniPanel = null;
-    private JLabel geriLabel = null;
-    private JLabel adSoyadLabel = null;
-    private JLabel toplamBakiyeLabel = null;
-    private JLabel musteriNoLabel = null;
-    private JTextField musteriNoText = null;
-    private JLabel gonderilecekTutarLabel = null;
-    private JTextField gonderilecekTutarText = null;
-    private JButton gonderButton = null;
-
-    HavaleEkraniActions action = new HavaleEkraniActions(this);
-
+public class HavaleEkrani extends javax.swing.JFrame implements IDuzenleyici,IBilgiController {
+    
+    private Havale havaleObject = null;
+    
+    private final String MUSTERI_NO_TEXT_ORIGINAL = "Müşteri No";
+    private int gonderilecekMiktar = 0;
+    
     public HavaleEkrani() {
-        panelAyarlamalariYap(getHavaleEkraniPanel());
-        getAdSoyadLabel().setText("Değerli Müşterimiz " + Actions.getDataController().getAdSoyad());
-        getToplamBakiyeLabel().setText("Hesabınızda toplam " + Actions.getDataController().getBakiye() + " TL bakiye bulunmaktadır.");
-        getHavaleEkraniFrame().setVisible(true);
-    }
-
-    public JFrame getHavaleEkraniFrame() {
-        if (havaleEkraniFrame == null) {
-            havaleEkraniFrame = new JFrame("Havale Ekranı");
-            havaleEkraniFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            havaleEkraniFrame.setResizable(false);
-            havaleEkraniFrame.setLocation(650, 320);
-            havaleEkraniFrame.setSize(500, 350);
-            havaleEkraniFrame.setContentPane(getHavaleEkraniPanel());
-        }
-        return havaleEkraniFrame;
-    }
-
-    public JPanel getHavaleEkraniPanel() {
-        if (havaleEkraniPanel == null) {
-            havaleEkraniPanel = new JPanel();
-            havaleEkraniPanel.setLayout(null);
-            havaleEkraniPanel.setFocusable(true);
-        }
-        return havaleEkraniPanel;
-    }
-
-    public JLabel getGeriLabel() {
-        if (geriLabel == null) {
-            geriLabel = new JLabel();
-            geriLabel.setBounds(10, 10, 30, 28);
-            geriLabel.setIcon(new ImageIcon(getClass().getResource("/Gui/Image/geriIcon.png")));
-            geriLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            geriLabel.addMouseListener(action);
-        }
-        return geriLabel;
-    }
-
-    public JLabel getAdSoyadLabel() {
-        if (adSoyadLabel == null) {
-            adSoyadLabel = new JLabel();
-            adSoyadLabel.setText("Değerli Müşterimiz [Ad Soyad]");
-            adSoyadLabel.setFont(getFont(1, 18));
-            adSoyadLabel.setForeground(Color.red);
-            adSoyadLabel.setBounds(20, 60, 450, 35);
-        }
-        return adSoyadLabel;
-    }
-
-    public JLabel getToplamBakiyeLabel() {
-        if (toplamBakiyeLabel == null) {
-            toplamBakiyeLabel = new JLabel();
-            toplamBakiyeLabel.setText("Hesabınızda Toplam .... TL Bakiye Bulunmaktadır.");
-            toplamBakiyeLabel.setFont(getFont(0, 18));
-            toplamBakiyeLabel.setForeground(Color.blue);
-            toplamBakiyeLabel.setBounds(40, 100, 450, 35);
-
-        }
-        return toplamBakiyeLabel;
-    }
-
-    public JLabel getMusteriNoLabel() {
-        if (musteriNoLabel == null) {
-            musteriNoLabel = new JLabel();
-            musteriNoLabel.setText("Müşteri Numarası   :");
-            musteriNoLabel.setFont(getFont(0, 18));
-            musteriNoLabel.setForeground(Color.black);
-            musteriNoLabel.setBounds(30, 150, 200, 35);
-        }
-        return musteriNoLabel;
-    }
-
-    public JTextField getMusteriNoText() {
-        if (musteriNoText == null) {
-            musteriNoText = new JTextField();
-            musteriNoText.setFont(getFont(0, 18));
-            musteriNoText.setBounds(200, 150, 180, 35);
-            KeyTyped.sadeceSayiAl(getHavaleEkraniFrame(), musteriNoText);
-        }
-        return musteriNoText;
-    }
-
-    public JLabel getGonderilecekTutarLabel() {
-        if (gonderilecekTutarLabel == null) {
-            gonderilecekTutarLabel = new JLabel();
-            gonderilecekTutarLabel.setText("Gönderilecek Tutar :");
-            gonderilecekTutarLabel.setFont(getFont(0, 18));
-            gonderilecekTutarLabel.setForeground(Color.black);
-            gonderilecekTutarLabel.setBounds(30, 200, 200, 35);
-
-        }
-        return gonderilecekTutarLabel;
-    }
-
-    public JTextField getGonderilecekTutarText() {
-        if (gonderilecekTutarText == null) {
-            gonderilecekTutarText = new JTextField();
-            gonderilecekTutarText.setFont(getFont(0, 18));
-            gonderilecekTutarText.setBounds(200, 200, 180, 35);
-            KeyTyped.sadeceSayiAl(getHavaleEkraniFrame(), gonderilecekTutarText);
-        }
-        return gonderilecekTutarText;
-    }
-
-    public JButton getHavaleButton() {
-        if (gonderButton == null) {
-            gonderButton = new JButton();
-            gonderButton.setText("Gönder");
-            gonderButton.setFont(getFont(1, 15));
-            gonderButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            gonderButton.setBounds(220, 250, 110, 35);
-            gonderButton.addActionListener(action);
-        }
-        return gonderButton;
-    }
-
-    public Font getFont(int style, int size) {
-        return new Font("Segoe UI", style, size);
+        initComponents();
+        getEdits();
     }
 
     @Override
-    public void panelAyarlamalariYap(JPanel panel) {
-        panel.setBackground(new Color(255, 204, 255));
-        panel.add(getGeriLabel());
-        panel.add(getAdSoyadLabel());
-        panel.add(getToplamBakiyeLabel());
-        panel.add(getMusteriNoLabel());
-        panel.add(getMusteriNoText());
-        panel.add(getGonderilecekTutarLabel());
-        panel.add(getGonderilecekTutarText());
-        panel.add(getHavaleButton());
+    public void getEdits() {
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        havaleEkraniPanel.setFocusable(true);
+        TextAyarlari.setOnlyNumber(gonderilecekMiktarText);
+        TextAyarlari.setMaxLimit(gonderilecekMiktarText, 5);
+        TextAyarlari.setOnlyNumber(musteriNoText);
+        musteriNoText.setText(MUSTERI_NO_TEXT_ORIGINAL);
+        this.kullaniciAdiSoyadiLabel.setText("Sayın " + getHesapBilgileri().getAdSoyad());
+        this.bakiyeLabel.setText(String.valueOf(getHesapBilgileri().getBakiye()));
     }
+
+    @Override
+    public boolean bilgilerGecerliMi() {
+        return !(this.gonderilecekMiktarText.getText().equals("")
+                || this.musteriNoText.getText().equals(this.MUSTERI_NO_TEXT_ORIGINAL));
+    }
+
+    @Override
+    public HesapBilgileri getHesapBilgileri() {
+        return HesapBilgileri.getInstance();
+    }
+
+    public Havale getHavaleObject() {
+        if(this.havaleObject == null) {
+            havaleObject = new Havale();
+        }
+        return havaleObject;
+    }
+ 
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        havaleEkraniPanel = new javax.swing.JPanel();
+        kullaniciAdiSoyadiLabel = new javax.swing.JLabel();
+        limitUyariLabel = new javax.swing.JLabel();
+        toplamBakiyenizLabel = new javax.swing.JLabel();
+        bakiyeLabel = new javax.swing.JLabel();
+        gondereceginizMiktarLabel = new javax.swing.JLabel();
+        gonderilecekMiktarText = new javax.swing.JTextField();
+        havaleButton = new javax.swing.JButton();
+        geriIcon = new javax.swing.JLabel();
+        musteriNoText = new javax.swing.JTextField();
+        havaleAlacakKisiLabel = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sweet Bank Havale Ekranı");
+
+        havaleEkraniPanel.setBackground(new java.awt.Color(255, 204, 255));
+
+        kullaniciAdiSoyadiLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        kullaniciAdiSoyadiLabel.setForeground(new java.awt.Color(255, 0, 51));
+        kullaniciAdiSoyadiLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        kullaniciAdiSoyadiLabel.setText("Sayın [KULLANICI ADI SOYADI]");
+
+        limitUyariLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        limitUyariLabel.setText("Tek seferde 20.000 TL ve altını gönderebilirsiniz.");
+
+        toplamBakiyenizLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        toplamBakiyenizLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        toplamBakiyenizLabel.setText("Toplam Bakiyeniz  :");
+
+        bakiyeLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bakiyeLabel.setText("[BAKİYE]");
+
+        gondereceginizMiktarLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        gondereceginizMiktarLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        gondereceginizMiktarLabel.setText("Göndereceğiniz Miktar :");
+
+        gonderilecekMiktarText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        gonderilecekMiktarText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                gonderilecekMiktarTextKeyReleased(evt);
+            }
+        });
+
+        havaleButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        havaleButton.setText("Havale Yap");
+        havaleButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        havaleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                havaleButtonActionPerformed(evt);
+            }
+        });
+
+        geriIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/iconlar/previousIcon.png"))); // NOI18N
+        geriIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        geriIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                geriIconMouseClicked(evt);
+            }
+        });
+
+        musteriNoText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        musteriNoText.setForeground(new java.awt.Color(153, 153, 153));
+        musteriNoText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                musteriNoTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                musteriNoTextFocusLost(evt);
+            }
+        });
+
+        havaleAlacakKisiLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        havaleAlacakKisiLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        havaleAlacakKisiLabel.setText("Havale Alacak Kişi :");
+
+        javax.swing.GroupLayout havaleEkraniPanelLayout = new javax.swing.GroupLayout(havaleEkraniPanel);
+        havaleEkraniPanel.setLayout(havaleEkraniPanelLayout);
+        havaleEkraniPanelLayout.setHorizontalGroup(
+            havaleEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(havaleEkraniPanelLayout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(limitUyariLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, havaleEkraniPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(havaleEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, havaleEkraniPanelLayout.createSequentialGroup()
+                        .addComponent(geriIcon)
+                        .addGap(18, 18, 18)
+                        .addGroup(havaleEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(kullaniciAdiSoyadiLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(havaleEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(havaleEkraniPanelLayout.createSequentialGroup()
+                                    .addComponent(gondereceginizMiktarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(gonderilecekMiktarText))
+                                .addGroup(havaleEkraniPanelLayout.createSequentialGroup()
+                                    .addComponent(toplamBakiyenizLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(bakiyeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(havaleEkraniPanelLayout.createSequentialGroup()
+                                    .addComponent(havaleAlacakKisiLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(musteriNoText))))
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, havaleEkraniPanelLayout.createSequentialGroup()
+                        .addComponent(havaleButton)
+                        .addGap(176, 176, 176))))
+        );
+        havaleEkraniPanelLayout.setVerticalGroup(
+            havaleEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(havaleEkraniPanelLayout.createSequentialGroup()
+                .addGroup(havaleEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(havaleEkraniPanelLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(kullaniciAdiSoyadiLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(havaleEkraniPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(geriIcon)))
+                .addGap(47, 47, 47)
+                .addComponent(limitUyariLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addGroup(havaleEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(toplamBakiyenizLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bakiyeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(havaleEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(gondereceginizMiktarLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gonderilecekMiktarText, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(havaleEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(havaleAlacakKisiLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(musteriNoText, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(havaleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(havaleEkraniPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(havaleEkraniPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void gonderilecekMiktarTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_gonderilecekMiktarTextKeyReleased
+        this.gonderilecekMiktar = TextAyarlari.checkTheTextKeyReleased(gonderilecekMiktarText, 20000);
+    }//GEN-LAST:event_gonderilecekMiktarTextKeyReleased
+
+    private void havaleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_havaleButtonActionPerformed
+        if(this.bilgilerGecerliMi()) {
+            this.havaleYap();
+        } else {
+            Dialogs.bosOlamazMesajiGoster(this);
+        }
+    }//GEN-LAST:event_havaleButtonActionPerformed
+
+    private void havaleYap() {
+        getHavaleObject().setGonderilecekMiktar(this.gonderilecekMiktar);
+        getHavaleObject().setHavaleAlacakKisi(this.musteriNoText.getText());
+        
+        if(getHavaleObject().havaleYapildiMi()) {
+            Dialogs.ozelMesajGoster(this, "Havale işlemi başarıyla gerçekleşmiştir.\n"
+                    + "Gönderilen müşteri numarası:" + this.musteriNoText.getText()
+                    + "\nGönderilen Miktar:" + this.gonderilecekMiktar + " TL");
+            ActionAyarlari.setVisible(this, new HesapEkrani());
+        } else {
+            Dialogs.ozelMesajGoster(this, "Havale işlemi gerçekleştirilemedi.\n"
+                    + "Lütfen bilgilerinizi kontrol edin!");
+        }
+    }
+    
+    private void geriIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_geriIconMouseClicked
+        ActionAyarlari.setVisible(this, new HesapEkrani());
+    }//GEN-LAST:event_geriIconMouseClicked
+
+    private void musteriNoTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_musteriNoTextFocusGained
+        TextAyarlari.checkTheTextFocusGained(musteriNoText, MUSTERI_NO_TEXT_ORIGINAL);
+    }//GEN-LAST:event_musteriNoTextFocusGained
+
+    private void musteriNoTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_musteriNoTextFocusLost
+        TextAyarlari.checkTheTextFocusLost(musteriNoText);
+    }//GEN-LAST:event_musteriNoTextFocusLost
+
+    
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(HavaleEkrani.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(HavaleEkrani.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(HavaleEkrani.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(HavaleEkrani.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new HavaleEkrani().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bakiyeLabel;
+    private javax.swing.JLabel geriIcon;
+    private javax.swing.JLabel gondereceginizMiktarLabel;
+    private javax.swing.JTextField gonderilecekMiktarText;
+    private javax.swing.JLabel havaleAlacakKisiLabel;
+    private javax.swing.JButton havaleButton;
+    private javax.swing.JPanel havaleEkraniPanel;
+    private javax.swing.JLabel kullaniciAdiSoyadiLabel;
+    private javax.swing.JLabel limitUyariLabel;
+    private javax.swing.JTextField musteriNoText;
+    private javax.swing.JLabel toplamBakiyenizLabel;
+    // End of variables declaration//GEN-END:variables
 }

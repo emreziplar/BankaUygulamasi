@@ -1,247 +1,433 @@
 package gui;
 
-import actions.Actions;
-import actions.OdemelerEkraniActions;
+import database.IBilgiController;
+import database.transactions.FaturaOdemeleri;
+import database.transactions.HesapBilgileri;
+import gui.ayarlar.ActionAyarlari;
+import gui.ayarlar.ButtonAyarlari;
+import gui.ayarlar.Dialogs;
+import gui.ayarlar.IDuzenleyici;
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import javax.swing.ImageIcon;
+import java.awt.Component;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
-public class OdemelerEkrani implements IPanelAyar {
+public class OdemelerEkrani extends javax.swing.JFrame implements IDuzenleyici, IBilgiController {
 
-    private JFrame odemelerEkraniFrame = null;
-    private JPanel odemelerEkraniPanel = null;
-    private JLabel geriLabel = null;
-    private JLabel adSoyadLabel = null;
-    private JLabel elektrikFaturasiLabel = null;
-    private JLabel elektrikBorcuLabel = null;
-    private JButton elektrikOdeButton = null;
-    private JLabel suFaturasiLabel = null;
-    private JLabel suBorcuLabel = null;
-    private JButton suOdeButton = null;
-    private JLabel dogalgazFaturasiLabel = null;
-    private JLabel dogalgazBorcuLabel = null;
-    private JButton dogalgazOdeButton = null;
-    private JLabel internetFaturasiLabel = null;
-    private JLabel internetBorcuLabel = null;
-    private JButton internetOdeButton = null;
-
-    OdemelerEkraniActions action = new OdemelerEkraniActions(this);
+    private FaturaOdemeleri faturaOdemeleriObject = null;
 
     public OdemelerEkrani() {
-        panelAyarlamalariYap(getOdemelerEkraniPanel());
-        getAdSoyadLabel().setText("Değerli Müşterimiz " + Actions.getDataController().getAdSoyad());
-        getElektrikBorcuLabel().setText(String.valueOf(Actions.getDataController().getElektrikFaturasi()) + " TL");
-        getSuBorcuLabel().setText(String.valueOf(Actions.getDataController().getSuFaturasi()) + " TL");
-        getInternetBorcuLabel().setText(String.valueOf(Actions.getDataController().getInternetFaturasi()) + " TL");
-        getDogalgazBorcuLabel().setText(String.valueOf(Actions.getDataController().getDogalgazFaturasi()) + " TL");
-        getOdemelerEkraniFrame().setVisible(true);
-    }
-
-    public JFrame getOdemelerEkraniFrame() {
-        if (odemelerEkraniFrame == null) {
-            odemelerEkraniFrame = new JFrame("Ödemeler Ekranı");
-            odemelerEkraniFrame.setResizable(false);
-            odemelerEkraniFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            odemelerEkraniFrame.setLocation(630, 280);
-            odemelerEkraniFrame.setSize(600, 450);
-            odemelerEkraniFrame.setContentPane(getOdemelerEkraniPanel());
-        }
-        return odemelerEkraniFrame;
-    }
-
-    public JPanel getOdemelerEkraniPanel() {
-        if (odemelerEkraniPanel == null) {
-            odemelerEkraniPanel = new JPanel();
-            odemelerEkraniPanel.setLayout(null);
-            odemelerEkraniPanel.setFocusable(true);
-        }
-        return odemelerEkraniPanel;
-    }
-
-    public JLabel getGeriLabel() {
-        if (geriLabel == null) {
-            geriLabel = new JLabel();
-            geriLabel.setBounds(10, 10, 30, 28);
-            geriLabel.setIcon(new ImageIcon(getClass().getResource("/Gui/Image/geriIcon.png")));
-            geriLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            geriLabel.addMouseListener(action);
-        }
-        return geriLabel;
-    }
-
-    public JLabel getAdSoyadLabel() {
-        if (adSoyadLabel == null) {
-            adSoyadLabel = new JLabel();
-            adSoyadLabel.setText("Değerli Müşterimiz [Ad Soyad]");
-            adSoyadLabel.setFont(getFont(1, 18));
-            adSoyadLabel.setForeground(Color.red);
-            adSoyadLabel.setBounds(20, 45, 280, 35);
-        }
-        return adSoyadLabel;
-    }
-
-    public JLabel getElektrikFaturasiLabel() {
-        if (elektrikFaturasiLabel == null) {
-            elektrikFaturasiLabel = new JLabel();
-            elektrikFaturasiLabel.setText("Toplam Elektrik Faturası Borcunuz ");
-            elektrikFaturasiLabel.setFont(getFont(1, 18));
-            elektrikFaturasiLabel.setForeground(Color.black);
-            elektrikFaturasiLabel.setBounds(20, 110, 300, 35);
-        }
-        return elektrikFaturasiLabel;
-    }
-
-    public JLabel getElektrikBorcuLabel() {
-        if (elektrikBorcuLabel == null) {
-            elektrikBorcuLabel = new JLabel();
-            elektrikBorcuLabel.setText("DENEME");
-            elektrikBorcuLabel.setFont(getFont(1, 15));
-            elektrikBorcuLabel.setForeground(Color.black);
-            elektrikBorcuLabel.setBounds(380, 110, 100, 35);
-        }
-        return elektrikBorcuLabel;
-    }
-
-    public JButton getElektrikOdeButton() {
-        if (elektrikOdeButton == null) {
-            elektrikOdeButton = new JButton();
-            elektrikOdeButton.setText("Öde");
-            elektrikOdeButton.setFont(getFont(1, 15));
-            elektrikOdeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            elektrikOdeButton.setBounds(480, 110, 75, 35);
-            elektrikOdeButton.addActionListener(action);
-        }
-        return elektrikOdeButton;
-    }
-
-    public JLabel getSuFaturasiLabel() {
-        if (suFaturasiLabel == null) {
-            suFaturasiLabel = new JLabel();
-            suFaturasiLabel.setText("Toplam Su Faturası Borcunuz ");
-            suFaturasiLabel.setFont(getFont(1, 18));
-            suFaturasiLabel.setForeground(Color.black);
-            suFaturasiLabel.setBounds(20, 180, 300, 35);
-        }
-        return suFaturasiLabel;
-    }
-
-    public JLabel getSuBorcuLabel() {
-        if (suBorcuLabel == null) {
-            suBorcuLabel = new JLabel();
-            suBorcuLabel.setText("DENEME");
-            suBorcuLabel.setFont(getFont(1, 15));
-            suBorcuLabel.setForeground(Color.black);
-            suBorcuLabel.setBounds(380, 180, 100, 35);
-        }
-        return suBorcuLabel;
-    }
-
-    public JButton getSuOdeButton() {
-        if (suOdeButton == null) {
-            suOdeButton = new JButton();
-            suOdeButton.setText("Öde");
-            suOdeButton.setFont(getFont(1, 15));
-            suOdeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            suOdeButton.setBounds(480, 180, 75, 35);
-            suOdeButton.addActionListener(action);
-        }
-        return suOdeButton;
-    }
-
-    public JLabel getDogalgazFaturasiLabel() {
-        if (dogalgazFaturasiLabel == null) {
-            dogalgazFaturasiLabel = new JLabel();
-            dogalgazFaturasiLabel.setText("Toplam Doğal Gaz Faturası Borcunuz ");
-            dogalgazFaturasiLabel.setFont(getFont(1, 18));
-            dogalgazFaturasiLabel.setForeground(Color.black);
-            dogalgazFaturasiLabel.setBounds(20, 250, 320, 35);
-        }
-        return dogalgazFaturasiLabel;
-    }
-
-    public JLabel getDogalgazBorcuLabel() {
-        if (dogalgazBorcuLabel == null) {
-            dogalgazBorcuLabel = new JLabel();
-            dogalgazBorcuLabel.setText("DENEME");
-            dogalgazBorcuLabel.setFont(getFont(1, 15));
-            dogalgazBorcuLabel.setForeground(Color.black);
-            dogalgazBorcuLabel.setBounds(380, 250, 100, 35);
-        }
-        return dogalgazBorcuLabel;
-    }
-
-    public JButton getDogalgazOdeButton() {
-        if (dogalgazOdeButton == null) {
-            dogalgazOdeButton = new JButton();
-            dogalgazOdeButton.setText("Öde");
-            dogalgazOdeButton.setFont(getFont(1, 15));
-            dogalgazOdeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            dogalgazOdeButton.setBounds(480, 250, 75, 35);
-            dogalgazOdeButton.addActionListener(action);
-        }
-        return dogalgazOdeButton;
-    }
-
-    public JLabel getInternetFaturasiLabel() {
-        if (internetFaturasiLabel == null) {
-            internetFaturasiLabel = new JLabel();
-            internetFaturasiLabel.setText("Toplam İnternet Faturası Borcunuz ");
-            internetFaturasiLabel.setFont(getFont(1, 18));
-            internetFaturasiLabel.setForeground(Color.black);
-            internetFaturasiLabel.setBounds(20, 320, 320, 35);
-        }
-        return internetFaturasiLabel;
-    }
-
-    public JLabel getInternetBorcuLabel() {
-        if (internetBorcuLabel == null) {
-            internetBorcuLabel = new JLabel();
-            internetBorcuLabel.setText("DENEME");
-            internetBorcuLabel.setFont(getFont(1, 15));
-            internetBorcuLabel.setForeground(Color.black);
-            internetBorcuLabel.setBounds(380, 320, 100, 35);
-        }
-        return internetBorcuLabel;
-    }
-
-    public JButton getInternetOdeButton() {
-        if (internetOdeButton == null) {
-            internetOdeButton = new JButton();
-            internetOdeButton.setText("Öde");
-            internetOdeButton.setFont(getFont(1, 15));
-            internetOdeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            internetOdeButton.setBounds(480, 320, 75, 35);
-            internetOdeButton.addActionListener(action);
-        }
-        return internetOdeButton;
-    }
-
-    public Font getFont(int style, int size) {
-        return new Font("Segoe UI", style, size);
+        initComponents();
+        getEdits();
     }
 
     @Override
-    public void panelAyarlamalariYap(JPanel panel) {
-        panel.setBackground(new Color(248, 248, 248));
-        panel.add(getGeriLabel());
-        panel.add(getAdSoyadLabel());
-        panel.add(getElektrikFaturasiLabel());
-        panel.add(getElektrikBorcuLabel());
-        panel.add(getElektrikOdeButton());
-        panel.add(getSuFaturasiLabel());
-        panel.add(getSuBorcuLabel());
-        panel.add(getSuOdeButton());
-        panel.add(getDogalgazFaturasiLabel());
-        panel.add(getDogalgazBorcuLabel());
-        panel.add(getDogalgazOdeButton());
-        panel.add(getInternetFaturasiLabel());
-        panel.add(getInternetBorcuLabel());
-        panel.add(getInternetOdeButton());
+    public void getEdits() {
+        this.setLocationRelativeTo(null);
+        odemelerEkraniPanel.setFocusable(true);
+        this.kullaniciAdiSoyadiLabel.setText("Sayın " + getHesapBilgileri().getAdSoyad());
+        this.elektrikBorcu.setText(String.valueOf(getHesapBilgileri().getElektrikFaturasi()));
+        this.suBorcu.setText(String.valueOf(getHesapBilgileri().getSuFaturasi()));
+        this.dogalgazBorcu.setText(String.valueOf(getHesapBilgileri().getDogalgazFaturasi()));
+        this.internetBorcu.setText(String.valueOf(getHesapBilgileri().getInternetFaturasi()));
     }
 
+    @Override
+    public boolean bilgilerGecerliMi() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public HesapBilgileri getHesapBilgileri() {
+        return HesapBilgileri.getInstance();
+    }
+
+    public FaturaOdemeleri getFaturaOdemeleriObject() {
+        if (this.faturaOdemeleriObject == null) {
+            faturaOdemeleriObject = new FaturaOdemeleri();
+        }
+        return faturaOdemeleriObject;
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        odemelerEkraniPanel = new javax.swing.JPanel();
+        kullaniciAdiSoyadiLabel = new javax.swing.JLabel();
+        geriIcon = new javax.swing.JLabel();
+        mesajElektrikLabel = new javax.swing.JLabel();
+        elektrikBorcu = new javax.swing.JLabel();
+        elektrikOdeButton = new javax.swing.JButton();
+        mesajSuLabel = new javax.swing.JLabel();
+        suBorcu = new javax.swing.JLabel();
+        suOdeButton = new javax.swing.JButton();
+        dogalgazOdeButton = new javax.swing.JButton();
+        mesajDogalgazLabel = new javax.swing.JLabel();
+        dogalgazBorcu = new javax.swing.JLabel();
+        mesajInternetLabel = new javax.swing.JLabel();
+        internetOdeButton = new javax.swing.JButton();
+        internetBorcu = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sweet Bank Ödemeler Ekranı");
+
+        odemelerEkraniPanel.setBackground(new java.awt.Color(204, 255, 204));
+
+        kullaniciAdiSoyadiLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        kullaniciAdiSoyadiLabel.setForeground(new java.awt.Color(255, 0, 51));
+        kullaniciAdiSoyadiLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        kullaniciAdiSoyadiLabel.setText("Sayın [KULLANICI ADI SOYADI]");
+
+        geriIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/iconlar/previousIcon.png"))); // NOI18N
+        geriIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        geriIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                geriIconMouseClicked(evt);
+            }
+        });
+
+        mesajElektrikLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        mesajElektrikLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mesajElektrikLabel.setText("Toplam elektrik faturası borcunuz :");
+
+        elektrikBorcu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        elektrikBorcu.setForeground(new java.awt.Color(0, 0, 255));
+        elektrikBorcu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        elektrikBorcu.setText("[ELEKT BORC]");
+
+        elektrikOdeButton.setBackground(new java.awt.Color(255, 204, 255));
+        elektrikOdeButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        elektrikOdeButton.setText("ÖDE");
+        elektrikOdeButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        elektrikOdeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                elektrikOdeButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                elektrikOdeButtonMouseExited(evt);
+            }
+        });
+        elektrikOdeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                elektrikOdeButtonActionPerformed(evt);
+            }
+        });
+
+        mesajSuLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        mesajSuLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mesajSuLabel.setText("Toplam su faturası borcunuz :");
+
+        suBorcu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        suBorcu.setForeground(new java.awt.Color(0, 0, 255));
+        suBorcu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        suBorcu.setText("[SU BORC]");
+
+        suOdeButton.setBackground(new java.awt.Color(204, 204, 255));
+        suOdeButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        suOdeButton.setText("ÖDE");
+        suOdeButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        suOdeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                suOdeButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                suOdeButtonMouseExited(evt);
+            }
+        });
+        suOdeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suOdeButtonActionPerformed(evt);
+            }
+        });
+
+        dogalgazOdeButton.setBackground(new java.awt.Color(204, 255, 255));
+        dogalgazOdeButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        dogalgazOdeButton.setText("ÖDE");
+        dogalgazOdeButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        dogalgazOdeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                dogalgazOdeButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                dogalgazOdeButtonMouseExited(evt);
+            }
+        });
+        dogalgazOdeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dogalgazOdeButtonActionPerformed(evt);
+            }
+        });
+
+        mesajDogalgazLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        mesajDogalgazLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mesajDogalgazLabel.setText("Toplam doğalgaz faturası borcunuz :");
+
+        dogalgazBorcu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        dogalgazBorcu.setForeground(new java.awt.Color(0, 0, 255));
+        dogalgazBorcu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dogalgazBorcu.setText("[DGLGZ BORC]");
+
+        mesajInternetLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        mesajInternetLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mesajInternetLabel.setText("Toplam internet faturası borcunuz :");
+
+        internetOdeButton.setBackground(new java.awt.Color(255, 255, 204));
+        internetOdeButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        internetOdeButton.setText("ÖDE");
+        internetOdeButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        internetOdeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                internetOdeButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                internetOdeButtonMouseExited(evt);
+            }
+        });
+        internetOdeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                internetOdeButtonActionPerformed(evt);
+            }
+        });
+
+        internetBorcu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        internetBorcu.setForeground(new java.awt.Color(0, 0, 255));
+        internetBorcu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        internetBorcu.setText("[INTRNT BORC]");
+
+        javax.swing.GroupLayout odemelerEkraniPanelLayout = new javax.swing.GroupLayout(odemelerEkraniPanel);
+        odemelerEkraniPanel.setLayout(odemelerEkraniPanelLayout);
+        odemelerEkraniPanelLayout.setHorizontalGroup(
+            odemelerEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(odemelerEkraniPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(geriIcon)
+                .addGap(18, 18, 18)
+                .addGroup(odemelerEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(odemelerEkraniPanelLayout.createSequentialGroup()
+                        .addComponent(mesajElektrikLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(elektrikBorcu, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(elektrikOdeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(kullaniciAdiSoyadiLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(odemelerEkraniPanelLayout.createSequentialGroup()
+                        .addComponent(mesajSuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(suBorcu, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(suOdeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(odemelerEkraniPanelLayout.createSequentialGroup()
+                        .addComponent(mesajDogalgazLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dogalgazBorcu, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(dogalgazOdeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(odemelerEkraniPanelLayout.createSequentialGroup()
+                        .addComponent(mesajInternetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(internetBorcu, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(internetOdeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        odemelerEkraniPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dogalgazBorcu, elektrikBorcu, internetBorcu, suBorcu});
+
+        odemelerEkraniPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dogalgazOdeButton, elektrikOdeButton, internetOdeButton, suOdeButton});
+
+        odemelerEkraniPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {mesajDogalgazLabel, mesajElektrikLabel, mesajInternetLabel, mesajSuLabel});
+
+        odemelerEkraniPanelLayout.setVerticalGroup(
+            odemelerEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(odemelerEkraniPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(odemelerEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(odemelerEkraniPanelLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(kullaniciAdiSoyadiLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(geriIcon))
+                .addGap(37, 37, 37)
+                .addGroup(odemelerEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mesajElektrikLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(elektrikBorcu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(elektrikOdeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(odemelerEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mesajSuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(suBorcu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(suOdeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(odemelerEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mesajDogalgazLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dogalgazBorcu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dogalgazOdeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(odemelerEkraniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mesajInternetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(internetBorcu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(internetOdeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(odemelerEkraniPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(odemelerEkraniPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void geriIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_geriIconMouseClicked
+        ActionAyarlari.setVisible(this, new HesapEkrani());
+    }//GEN-LAST:event_geriIconMouseClicked
+
+    /*
+     *Buton renklendirmeleri
+     */
+    private void setBgFg(Component c) {
+        ButtonAyarlari.setBgFg((JButton) c, Color.black, Color.white);
+    }
+    private void elektrikOdeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elektrikOdeButtonMouseEntered
+        this.setBgFg(evt.getComponent());
+    }//GEN-LAST:event_elektrikOdeButtonMouseEntered
+
+    private void elektrikOdeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elektrikOdeButtonMouseExited
+        ButtonAyarlari.setOriginalBgFg((JButton) evt.getComponent());
+    }//GEN-LAST:event_elektrikOdeButtonMouseExited
+
+    private void suOdeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suOdeButtonMouseEntered
+        this.setBgFg(evt.getComponent());
+    }//GEN-LAST:event_suOdeButtonMouseEntered
+
+    private void suOdeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suOdeButtonMouseExited
+        ButtonAyarlari.setOriginalBgFg((JButton) evt.getComponent());
+    }//GEN-LAST:event_suOdeButtonMouseExited
+
+    private void dogalgazOdeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dogalgazOdeButtonMouseEntered
+        this.setBgFg(evt.getComponent());
+    }//GEN-LAST:event_dogalgazOdeButtonMouseEntered
+
+    private void dogalgazOdeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dogalgazOdeButtonMouseExited
+        ButtonAyarlari.setOriginalBgFg((JButton) evt.getComponent());
+    }//GEN-LAST:event_dogalgazOdeButtonMouseExited
+
+    private void internetOdeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_internetOdeButtonMouseEntered
+        this.setBgFg(evt.getComponent());
+    }//GEN-LAST:event_internetOdeButtonMouseEntered
+
+    private void internetOdeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_internetOdeButtonMouseExited
+        ButtonAyarlari.setOriginalBgFg((JButton) evt.getComponent());
+    }//GEN-LAST:event_internetOdeButtonMouseExited
+
+    /*
+     *Actions
+     */
+    private void elektrikOdeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elektrikOdeButtonActionPerformed
+        double elektrikTutari = Double.valueOf(this.elektrikBorcu.getText());
+        if (this.faturaOncedenOdenmisMi(elektrikTutari)) {
+            Dialogs.ozelMesajGoster(this, "Elektrik faturası zaten ödenmiş!");
+        } else {
+            this.faturayiOde("elektrik", elektrikTutari);
+        }
+    }//GEN-LAST:event_elektrikOdeButtonActionPerformed
+
+    private void suOdeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suOdeButtonActionPerformed
+        double suTutari = Double.valueOf(this.suBorcu.getText());
+        if (this.faturaOncedenOdenmisMi(suTutari)) {
+            Dialogs.ozelMesajGoster(this, "Su faturası zaten ödenmiş!");
+        } else {
+            this.faturayiOde("su", suTutari);
+        }
+    }//GEN-LAST:event_suOdeButtonActionPerformed
+
+    private void dogalgazOdeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dogalgazOdeButtonActionPerformed
+        double dogalgazTutari = Double.valueOf(this.dogalgazBorcu.getText());
+        if (this.faturaOncedenOdenmisMi(dogalgazTutari)) {
+            Dialogs.ozelMesajGoster(this, "Doğalgaz faturası zaten ödenmiş!");
+        } else {
+            this.faturayiOde("dogalgaz", dogalgazTutari);
+        }
+    }//GEN-LAST:event_dogalgazOdeButtonActionPerformed
+
+    private void internetOdeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_internetOdeButtonActionPerformed
+        double internetTutari = Double.valueOf(this.internetBorcu.getText());
+        if (this.faturaOncedenOdenmisMi(internetTutari)) {
+            Dialogs.ozelMesajGoster(this, "İnternet faturası zaten ödenmiş!");
+        } else {
+            this.faturayiOde("internet", internetTutari);
+        }
+    }//GEN-LAST:event_internetOdeButtonActionPerformed
+
+    private boolean faturaOncedenOdenmisMi(double odenecekTutar) {
+        return odenecekTutar == 0.0;
+    }
+
+    private void faturayiOde(String faturaIsmi, double faturaTutari) {
+        this.getFaturaOdemeleriObject().setFaturaIsmi(faturaIsmi);
+        this.getFaturaOdemeleriObject().setFaturaTutari(faturaTutari);
+
+        if (getFaturaOdemeleriObject().faturaOdendiMi()) {
+            Dialogs.ozelMesajGoster(this, "Faturanız başarıyla ödenmiştir.");
+            ActionAyarlari.setVisible(this, new HesapEkrani());
+        } else {
+            Dialogs.ozelMesajGoster(this, "Ödeme işlemi gerçekleştirilemedi!");
+        }
+    }
+
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(OdemelerEkrani.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(OdemelerEkrani.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(OdemelerEkrani.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(OdemelerEkrani.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new OdemelerEkrani().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel dogalgazBorcu;
+    private javax.swing.JButton dogalgazOdeButton;
+    private javax.swing.JLabel elektrikBorcu;
+    private javax.swing.JButton elektrikOdeButton;
+    private javax.swing.JLabel geriIcon;
+    private javax.swing.JLabel internetBorcu;
+    private javax.swing.JButton internetOdeButton;
+    private javax.swing.JLabel kullaniciAdiSoyadiLabel;
+    private javax.swing.JLabel mesajDogalgazLabel;
+    private javax.swing.JLabel mesajElektrikLabel;
+    private javax.swing.JLabel mesajInternetLabel;
+    private javax.swing.JLabel mesajSuLabel;
+    private javax.swing.JPanel odemelerEkraniPanel;
+    private javax.swing.JLabel suBorcu;
+    private javax.swing.JButton suOdeButton;
+    // End of variables declaration//GEN-END:variables
 }
